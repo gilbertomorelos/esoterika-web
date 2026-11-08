@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Registro · Esoterika Umbra Arcana</title>
+<meta name="theme-color" content="#0b0710">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0710;--vino:#5a1426;--mor:#3b1659;--oro:#c9a45c;--oro2:#8c6d34;--humo:#b9aec4;--txt:#e9e1ee;--serif:'Cinzel',serif;--cur:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at 50% 40%,rgba(59,22,89,.5),transparent 70%),var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.6;min-height:100svh;padding:40px 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.06em;line-height:1.2}
+.wrap{max-width:520px;margin:0 auto}
+.eyebrow{font-family:var(--serif);color:var(--oro);letter-spacing:.35em;font-size:.72rem;text-transform:uppercase;display:block;margin-bottom:16px;text-align:center}
+h1{font-size:clamp(1.6rem,5vw,2.2rem);color:#f3e7c9;margin-bottom:14px;text-align:center}
+.lead{font-family:var(--cur);font-style:italic;font-size:1.15rem;color:var(--humo);margin-bottom:30px;text-align:center}
+.resumen{padding:18px;border:1px solid rgba(201,164,92,.3);border-radius:6px;background:rgba(11,7,16,.5);margin-bottom:30px}
+.resumen p{font-size:.9rem;color:var(--humo);margin-bottom:6px}
+.resumen strong{color:var(--oro)}
+form label:not(.consent){display:block;margin:18px 0 8px;color:#f3e7c9;font-size:.92rem}
+form input[type=email],form select{width:100%;min-height:50px;padding:14px;border:1px solid rgba(201,164,92,.5);border-radius:3px;background:#150b1c;color:var(--txt);font:inherit;font-size:.95rem}
+form select option{background:#150b1c}
+.consent{display:flex;align-items:flex-start;gap:10px;margin-top:16px;color:var(--humo);font-size:.78rem;line-height:1.5}
+.consent input{margin-top:4px;accent-color:var(--oro)}
+.consent a{color:var(--oro)}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;border:1px solid var(--oro);color:#f3e7c9;background:linear-gradient(135deg,rgba(90,20,38,.85),rgba(59,22,89,.85));font-family:var(--serif);letter-spacing:.2em;font-size:.8rem;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .3s;width:100%;margin-top:24px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(201,164,92,.35)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.estado{text-align:center;margin-top:14px;color:var(--oro);font-size:.85rem;min-height:20px}
+.back-link{color:var(--oro2);text-decoration:none;font-size:.85rem;display:block;text-align:center;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow" id="eyebrow">Antes de continuar</span>
+  <h1 id="titulo">TUS DATOS</h1>
+  <p class="lead" id="lead">Déjanos tus datos para preparar tu lectura.</p>
+
+  <div class="resumen">
+    <p id="rTipo"></p>
+    <p id="rDetalle"></p>
+    <p id="rPrecio"></p>
+  </div>
+
+  <form id="formRegistro">
+    <label for="email">Correo electrónico</label>
+    <input id="email" type="email" autocomplete="email" placeholder="tu@correo.com" required>
+
+    <label for="signo">Signo zodiacal</label>
+    <select id="signo" required>
+      <option value="">Selecciona tu signo</option>
+      <option>Aries</option><option>Tauro</option><option>Géminis</option><option>Cáncer</option>
+      <option>Leo</option><option>Virgo</option><option>Libra</option><option>Escorpio</option>
+      <option>Sagitario</option><option>Capricornio</option><option>Acuario</option><option>Piscis</option>
+    </select>
+
+    <label class="consent"><input id="privacidad" type="checkbox" required>
+      <span>He leído el <a href="/aviso-de-privacidad" target="_blank">aviso de privacidad</a> y autorizo el uso de mis datos.</span>
+    </label>
+    <label class="consent"><input id="marketing" type="checkbox">
+      <span>Quiero recibir contenido, novedades y ofertas. (Opcional)</span>
+    </label>
+
+    <button class="btn" id="btnEnviar" type="submit">Continuar</button>
+    <p class="estado" id="estado"></p>
+  </form>
+
+  <a href="index.html" class="back-link">← Volver al inicio</a>
+</div>
+
+<script>
+let CONFIG = null;
+let tipo = 'gratis';
+
+fetch('tarot.json').then(r => r.json()).then(TAROT => {
+  CONFIG = TAROT.config;
+
+  const params = new URLSearchParams(window.location.search);
+  tipo = params.get('tipo') || 'gratis';
+
+  if (tipo === 'premium') {
+    document.getElementById('eyebrow').textContent = 'Antes del pago';
+    document.getElementById('titulo').textContent = 'TUS DATOS';
+    document.getElementById('lead').textContent = 'Primero déjanos tus datos, luego completas el pago.';
+
+    const cartas = JSON.parse(localStorage.getItem('esoterika_cartas_premium') || '[]');
+    const producto = localStorage.getItem('esoterika_producto') || 'Tarot General';
+
+    document.getElementById('rTipo').innerHTML = 'Producto: <strong>' + producto + '</strong>';
+    document.getElementById('rDetalle').innerHTML = 'Cartas: <strong>' + cartas.join(' · ') + '</strong>';
+    document.getElementById('rPrecio').innerHTML = 'Precio: <strong>$' + CONFIG.precio + ' ' + CONFIG.currency + '</strong>';
+  } else {
+    document.getElementById('eyebrow').textContent = 'Antes de tu lectura';
+    document.getElementById('titulo').textContent = 'TUS DATOS';
+    document.getElementById('lead').textContent = 'Déjanos tus datos para mostrar tu lectura.';
+
+    const carta = localStorage.getItem('esoterika_carta') || '';
+    document.getElementById('rTipo').innerHTML = 'Carta: <strong>' + carta + '</strong>';
+    document.getElementById('rDetalle').innerHTML = 'Tipo: <strong>Lectura gratuita</strong>';
+    document.getElementById('rPrecio').innerHTML = 'Precio: <strong>Gratis</strong>';
+  }
+});
+
+document.getElementById('formRegistro').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!document.getElementById('privacidad').checked) {
+    document.getElementById('estado').textContent = 'Necesitamos tu autorización para continuar.';
+    return;
+  }
+
+  const btn = document.getElementById('btnEnviar');
+  btn.disabled = true;
+  document.getElementById('estado').textContent = 'Guardando...';
+
+  const datos = {
+    email: document.getElementById('email').value.trim(),
+    signo: document.getElementById('signo').value,
+    carta: localStorage.getItem('esoterika_carta') || '',
+    cartas_premium: localStorage.getItem('esoterika_cartas_premium') || '',
+    producto: localStorage.getItem('esoterika_producto') || 'Lectura gratis',
+    tipo: tipo,
+    origen: tipo === 'premium' ? 'registro_premium' : 'registro_gratis',
+    consentimiento_privacidad: true,
+    consentimiento_marketing: document.getElementById('marketing').checked
+  };
+
+  localStorage.setItem('esoterika_email', datos.email);
+  localStorage.setItem('esoterika_signo', datos.signo);
+
+  if (CONFIG.googleSheetsUrl && !CONFIG.googleSheetsUrl.includes('TU_ID')) {
+    try {
+      await fetch(CONFIG.googleSheetsUrl, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+      });
+    } catch (err) { console.warn(err); }
+  }
+
+  document.getElementById('estado').textContent = 'Listo. Redirigiendo...';
+  setTimeout(() => {
+    if (tipo === 'premium') {
+      window.location.href = 'pago.html';
+    } else {
+      window.location.href = 'gracias.html';
+    }
+  }, 700);
+});
+</script>
+</body>
+</html>

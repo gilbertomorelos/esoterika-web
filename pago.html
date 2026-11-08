@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pago · Esoterika Umbra Arcana</title>
+<meta name="theme-color" content="#0b0710">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0710;--vino:#5a1426;--mor:#3b1659;--oro:#c9a45c;--oro2:#8c6d34;--humo:#b9aec4;--txt:#e9e1ee;--serif:'Cinzel',serif;--cur:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at 50% 40%,rgba(59,22,89,.5),transparent 70%),var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.6;min-height:100svh;padding:40px 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.06em;line-height:1.2}
+.wrap{max-width:560px;margin:0 auto}
+.eyebrow{font-family:var(--serif);color:var(--oro);letter-spacing:.35em;font-size:.72rem;text-transform:uppercase;display:block;margin-bottom:16px;text-align:center}
+h1{font-size:clamp(1.6rem,5vw,2.2rem);color:#f3e7c9;margin-bottom:14px;text-align:center}
+.lead{font-family:var(--cur);font-style:italic;font-size:1.15rem;color:var(--humo);margin-bottom:30px;text-align:center}
+.resumen{padding:18px;border:1px solid rgba(201,164,92,.3);border-radius:6px;background:rgba(11,7,16,.5);margin-bottom:26px}
+.resumen p{font-size:.9rem;color:var(--humo);margin-bottom:6px}
+.resumen strong{color:var(--oro)}
+.aviso{padding:16px 20px;border-left:3px solid var(--oro);background:rgba(11,7,16,.7);border-radius:4px;margin-bottom:26px;font-size:.9rem;line-height:1.6;color:#d9cfe2}
+.aviso strong{color:var(--oro)}
+.opcion{display:block;width:100%;padding:22px;margin-bottom:14px;border:1px solid rgba(201,164,92,.4);border-radius:6px;background:rgba(59,22,89,.25);cursor:pointer;transition:all .3s;text-align:left;font-family:inherit;color:inherit}
+.opcion:hover{border-color:var(--oro);background:rgba(59,22,89,.45)}
+.opcion h3{color:var(--oro);font-size:1.05rem;margin-bottom:8px}
+.opcion p{font-size:.85rem;color:var(--humo);line-height:1.5}
+.instrucciones{margin-top:20px;padding:20px;background:rgba(11,7,16,.7);border-left:3px solid var(--oro);border-radius:4px;font-size:.9rem;line-height:1.8;display:none}
+.instrucciones.on{display:block}
+.instrucciones strong{color:var(--oro)}
+.instrucciones code{background:rgba(201,164,92,.15);padding:3px 8px;border-radius:3px;color:var(--oro);font-family:monospace;font-size:.88rem}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;border:1px solid var(--oro);color:#f3e7c9;background:linear-gradient(135deg,rgba(90,20,38,.85),rgba(59,22,89,.85));font-family:var(--serif);letter-spacing:.2em;font-size:.8rem;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .3s;width:100%;margin-top:20px;text-decoration:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(201,164,92,.35)}
+.btn.ghost{background:transparent}
+.btn.oro{background:linear-gradient(135deg,var(--oro),var(--oro2));color:var(--bg);font-weight:700}
+.back-link{color:var(--oro2);text-decoration:none;font-size:.85rem;display:block;text-align:center;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Confirmar compra</span>
+  <h1>ELIGE TU MÉTODO DE PAGO</h1>
+  <p class="lead">Ambos métodos son seguros.</p>
+
+  <div class="resumen">
+    <p>Producto: <strong id="rProducto">—</strong></p>
+    <p>Cartas: <strong id="rCartas">—</strong></p>
+    <p>Total: <strong id="rPrecio">—</strong></p>
+  </div>
+
+  <div class="aviso">
+    <strong>📌 Importante:</strong> al pagar, recibirás un <strong>código de verificación</strong> por WhatsApp. Ese código es el que te permitirá desbloquear tu lectura completa.
+  </div>
+
+  <button class="opcion" id="btnMP">
+    <h3>💳 Mercado Pago</h3>
+    <p>Paga con tarjeta, débito, crédito o efectivo en tiendas. Te enviaremos tu código al confirmarse el pago.</p>
+  </button>
+
+  <button class="opcion" id="btnTrans">
+    <h3>🏦 Transferencia bancaria</h3>
+    <p>Transfiere directamente y envíanos el comprobante por WhatsApp. Procesamos tu lectura el mismo día.</p>
+  </button>
+
+  <div class="instrucciones" id="instrucciones">
+    <strong>Datos para transferencia:</strong><br>
+    Banco: <span id="iBanco"></span><br>
+    Cuenta: <code id="iCuenta"></code><br>
+    CLABE: <code id="iClabe"></code><br>
+    Titular: <span id="iTitular"></span><br>
+    Monto: <strong id="iMonto"></strong><br><br>
+    <strong>Después de transferir:</strong><br>
+    Envía tu comprobante por WhatsApp junto con tu correo. Te enviaremos tu código de verificación para desbloquear tu lectura.
+
+    <a class="btn" id="btnWA" target="_blank" rel="noopener" style="margin-top:16px">Enviar comprobante por WhatsApp</a>
+  </div>
+
+  <a href="gracias-premium.html" class="btn oro" id="btnYaPague" style="margin-top:24px">Ya pagué, ir a mi lectura →</a>
+</div>
+
+<script>
+let CONFIG = null, producto = null;
+
+fetch('tarot.json').then(r => r.json()).then(TAROT => {
+  CONFIG = TAROT.config;
+  producto = localStorage.getItem('esoterika_producto');
+  const cartas = JSON.parse(localStorage.getItem('esoterika_cartas_premium') || '[]');
+  const email = localStorage.getItem('esoterika_email');
+
+  if (!producto) {
+    window.location.href = 'index.html';
+    return;
+  }
+
+  document.getElementById('rProducto').textContent = producto;
+  document.getElementById('rCartas').textContent = cartas.join(' · ');
+  document.getElementById('rPrecio').textContent = '$' + CONFIG.precio + ' ' + CONFIG.currency;
+
+  document.getElementById('iBanco').textContent = CONFIG.transferencia.banco;
+  document.getElementById('iCuenta').textContent = CONFIG.transferencia.cuenta;
+  document.getElementById('iClabe').textContent = CONFIG.transferencia.clabe;
+  document.getElementById('iTitular').textContent = CONFIG.transferencia.titular;
+  document.getElementById('iMonto').textContent = '$' + CONFIG.precio + ' ' + CONFIG.currency;
+
+  const mensaje = `Hola, pagué la lectura "${producto}" (cartas: ${cartas.join(', ')}) por $${CONFIG.precio} ${CONFIG.currency}. Mi correo es: ${email || '[correo]'}. Adjunto comprobante.`;
+  document.getElementById('btnWA').href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(mensaje)}`;
+
+  document.getElementById('btnMP').onclick = () => {
+    const link = CONFIG.mercadoPagoLinks[producto];
+    if (link && !link.includes('TU_LINK')) {
+      localStorage.setItem('esoterika_metodo_pago', 'mercadopago');
+      window.open(link, '_blank');
+    } else {
+      alert('El link de pago aún no está configurado. Por favor usa la transferencia o escríbenos por WhatsApp.');
+    }
+  };
+
+  document.getElementById('btnTrans').onclick = () => {
+    localStorage.setItem('esoterika_metodo_pago', 'transferencia');
+    document.getElementById('instrucciones').classList.add('on');
+    document.getElementById('instrucciones').scrollIntoView({ behavior: 'smooth' });
+  };
+});
+</script>
+</body>
+</html>

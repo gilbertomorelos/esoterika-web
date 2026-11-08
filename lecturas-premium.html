@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lectura Premium · Esoterika Umbra Arcana</title>
+<meta name="theme-color" content="#0b0710">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0710;--vino:#5a1426;--mor:#3b1659;--oro:#c9a45c;--oro2:#8c6d34;--humo:#b9aec4;--txt:#e9e1ee;--serif:'Cinzel',serif;--cur:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at 50% 40%,rgba(59,22,89,.5),transparent 70%),var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.6;min-height:100svh;padding:40px 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.06em;line-height:1.2}
+.wrap{max-width:900px;margin:0 auto}
+.center{text-align:center}
+.eyebrow{font-family:var(--serif);color:var(--oro);letter-spacing:.35em;font-size:.72rem;text-transform:uppercase;display:block;margin-bottom:16px}
+h1{font-size:clamp(1.8rem,6vw,2.8rem);color:#f3e7c9;margin-bottom:14px}
+.lead{font-family:var(--cur);font-style:italic;font-size:clamp(1.1rem,4vw,1.4rem);color:var(--humo);margin-bottom:30px}
+.precio-tag{display:inline-block;padding:8px 20px;border:1px solid var(--oro);border-radius:20px;color:var(--oro);font-family:var(--serif);font-size:1rem;margin-bottom:30px}
+.deck{display:flex;justify-content:center;gap:16px;margin:40px 0;perspective:1200px;flex-wrap:wrap}
+.pick{width:min(20vw,110px);aspect-ratio:2/3.3;border:0;background:none;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.3,.7,.2,1),opacity .8s,filter .8s}
+.pick .f{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--oro);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px;text-align:center}
+.pick .back{background:repeating-linear-gradient(45deg,rgba(201,164,92,.07) 0 6px,transparent 6px 12px),linear-gradient(160deg,var(--mor),#14061f);box-shadow:inset 0 0 0 5px #0b0710,inset 0 0 0 6px rgba(201,164,92,.5)}
+.pick .front{transform:rotateY(180deg);background:linear-gradient(160deg,#2a1040,var(--vino));box-shadow:0 0 40px rgba(201,164,92,.4)}
+.pick .front b{font-family:var(--serif);font-size:clamp(.55rem,2.4vw,.75rem);color:#f3e7c9;letter-spacing:.08em}
+.pick .front span{font-size:1.8rem;color:var(--oro)}
+.deck:not(.done) .pick:hover{transform:translateY(-10px) rotate(-1.5deg);filter:drop-shadow(0 0 18px rgba(201,164,92,.5))}
+.pick.flip{transform:rotateY(180deg) translateY(-8px)}
+.pick.chosen{filter:drop-shadow(0 0 24px rgba(201,164,92,.9))}
+.pick.chosen .front{border-color:#f7ecd0;border-width:2px}
+.pick.disabled{opacity:.35;filter:grayscale(1);pointer-events:none}
+.status{text-align:center;color:var(--oro);font-family:var(--serif);font-size:.95rem;margin:20px 0;letter-spacing:.15em;text-transform:uppercase}
+.continuar{text-align:center;margin-top:30px;display:none}
+.continuar.on{display:block}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;border:1px solid var(--oro);color:#f3e7c9;background:linear-gradient(135deg,rgba(90,20,38,.85),rgba(59,22,89,.85));font-family:var(--serif);letter-spacing:.2em;font-size:.8rem;text-decoration:none;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .3s;min-width:280px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(201,164,92,.35)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.back-link{color:var(--oro2);text-decoration:none;font-size:.85rem;display:block;text-align:center;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="center">
+    <span class="eyebrow">Lectura premium</span>
+    <h1>ELIGE 3 CARTAS</h1>
+    <p class="lead">Respira. Concéntrate en tu pregunta.<br>Elige las 3 cartas que te llamen.</p>
+    <div class="precio-tag">$99 MXN · Tirada de 3 cartas</div>
+  </div>
+
+  <div class="deck" id="deck"></div>
+
+  <div class="status" id="status">Elige 3 cartas · 0/3</div>
+
+  <div class="continuar" id="continuar">
+    <button class="btn" id="btnContinuar" disabled>Continuar al registro</button>
+  </div>
+
+  <div class="center">
+    <a href="index.html" class="back-link">← Volver al inicio</a>
+  </div>
+</div>
+
+<script>
+let TAROT = null;
+const cartasElegidas = [];
+const MAX_CARTAS = 3;
+
+fetch('tarot.json').then(r => r.json()).then(data => {
+  TAROT = data;
+  document.title = 'Lectura Premium · ' + TAROT.config.brand;
+  dealCards();
+});
+
+function dealCards() {
+  const deck = document.getElementById('deck');
+  const nombres = Object.keys(TAROT.cartas);
+  const pool = [...nombres].sort(() => Math.random() - .5).slice(0, 6);
+
+  deck.innerHTML = pool.map(nombre => {
+    const c = TAROT.cartas[nombre];
+    return `<button class="pick" data-nombre="${nombre}">
+      <div class="f back"><svg viewBox="0 0 100 100" width="50%"><circle cx="50" cy="50" r="18" fill="none" stroke="#c9a45c" stroke-width="2"/><path d="M50 8v14M50 78v14M8 50h14M78 50h14" stroke="#c9a45c" stroke-width="2"/></svg></div>
+      <div class="f front"><span>${c.s}</span><b>${nombre.toUpperCase()}</b></div>
+    </button>`;
+  }).join('');
+
+  deck.querySelectorAll('.pick').forEach(el => el.onclick = () => {
+    const nombre = el.dataset.nombre;
+    if (cartasElegidas.includes(nombre)) return;
+    if (cartasElegidas.length >= MAX_CARTAS) return;
+
+    cartasElegidas.push(nombre);
+    el.classList.add('flip', 'chosen');
+
+    setTimeout(() => el.classList.add('disabled'), 600);
+
+    actualizarEstado();
+
+    if (cartasElegidas.length === MAX_CARTAS) {
+      setTimeout(() => {
+        document.getElementById('continuar').classList.add('on');
+        document.getElementById('btnContinuar').disabled = false;
+        document.getElementById('continuar').scrollIntoView({ behavior: 'smooth' });
+      }, 800);
+    }
+  });
+}
+
+function actualizarEstado() {
+  document.getElementById('status').textContent = `Elige 3 cartas · ${cartasElegidas.length}/3`;
+}
+
+document.getElementById('btnContinuar').onclick = () => {
+  if (cartasElegidas.length !== MAX_CARTAS) return;
+  localStorage.setItem('esoterika_cartas_premium', JSON.stringify(cartasElegidas));
+  const urlParams = new URLSearchParams(window.location.search);
+  const producto = urlParams.get('producto') || 'general';
+  localStorage.setItem('esoterika_producto_id', producto);
+  const nombres = { 'general': 'Tarot General', 'amor': 'Tarot del Amor', 'preguntas': 'Las 3 Preguntas' };
+  localStorage.setItem('esoterika_producto', nombres[producto] || 'Tarot General');
+  window.location.href = 'registro.html?tipo=premium';
+};
+</script>
+</body>
+</html>

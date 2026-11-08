@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gracias por tu compra · Esoterika Umbra Arcana</title>
+<meta name="theme-color" content="#0b0710">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0710;--vino:#5a1426;--mor:#3b1659;--oro:#c9a45c;--oro2:#8c6d34;--humo:#b9aec4;--txt:#e9e1ee;--serif:'Cinzel',serif;--cur:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at 50% 40%,rgba(59,22,89,.5),transparent 70%),var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.7;min-height:100svh;padding:40px 20px}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;letter-spacing:.06em;line-height:1.3}
+.wrap{max-width:640px;margin:0 auto}
+.center{text-align:center}
+.eyebrow{font-family:var(--serif);color:var(--oro);letter-spacing:.35em;font-size:.72rem;text-transform:uppercase;display:block;margin-bottom:16px}
+h1{font-size:clamp(1.6rem,5vw,2.2rem);color:#f3e7c9;margin-bottom:14px}
+.lead{font-family:var(--cur);font-style:italic;font-size:1.2rem;color:var(--humo);margin-bottom:30px}
+
+.check{width:90px;height:90px;margin:0 auto 24px;border-radius:50%;background:linear-gradient(135deg,#4ade80,#22c55e);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--bg);box-shadow:0 0 40px rgba(74,222,128,.4)}
+
+.aviso{padding:20px;border:1px solid rgba(251,191,36,.5);border-radius:8px;background:rgba(251,191,36,.1);margin-bottom:24px;text-align:center}
+.aviso .icono{font-size:1.8rem;margin-bottom:8px}
+.aviso h4{color:#fbbf24;font-size:1rem;margin-bottom:8px}
+.aviso p{color:#fde68a;font-size:.88rem;margin:0}
+
+.formulario{padding:30px 24px;border:1px solid rgba(201,164,92,.4);border-radius:8px;background:rgba(11,7,16,.6);margin-bottom:24px}
+.formulario h3{color:var(--oro);font-size:1.2rem;margin-bottom:8px;text-align:center}
+.formulario .intro{color:var(--humo);font-size:.9rem;text-align:center;margin-bottom:24px}
+
+.campo{margin-bottom:18px}
+.campo label{display:block;color:#f3e7c9;font-size:.9rem;margin-bottom:6px;font-family:var(--serif)}
+.campo input, .campo select{width:100%;min-height:48px;padding:12px;border:1px solid rgba(201,164,92,.5);border-radius:3px;background:#150b1c;color:var(--txt);font:inherit;font-size:.95rem}
+.campo input:focus, .campo select:focus{outline:none;border-color:var(--oro);box-shadow:0 0 12px rgba(201,164,92,.3)}
+.campo .ayuda{font-size:.78rem;color:var(--oro2);margin-top:4px}
+.campo.opcional label::after{content:" (opcional)";color:var(--oro2);font-size:.75rem;font-family:var(--sans)}
+
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;border:1px solid var(--oro);color:#f3e7c9;background:linear-gradient(135deg,rgba(90,20,38,.85),rgba(59,22,89,.85));font-family:var(--serif);letter-spacing:.2em;font-size:.8rem;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .3s;width:100%;text-decoration:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(201,164,92,.35)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.oro{background:linear-gradient(135deg,var(--oro),var(--oro2));color:var(--bg);font-weight:700;border-color:var(--oro)}
+.btn.ghost{background:transparent}
+.btn.wa{background:linear-gradient(135deg,#25d366,#128c7e);border-color:#25d366}
+
+.estado{text-align:center;margin-top:14px;color:var(--oro);font-size:.88rem;min-height:20px}
+
+.exito{padding:30px 24px;border:2px solid #4ade80;border-radius:8px;background:linear-gradient(160deg,rgba(74,222,128,.1),rgba(11,7,16,.95));text-align:center}
+.exito .icono{font-size:3rem;margin-bottom:12px}
+.exito h3{color:#4ade80;font-size:1.3rem;margin-bottom:10px}
+.exito p{color:var(--humo);font-size:.95rem;margin-bottom:16px}
+
+.back-link{color:var(--oro2);text-decoration:none;font-size:.85rem;display:block;text-align:center;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="center">
+    <div class="check">✓</div>
+    <span class="eyebrow">Pago confirmado</span>
+    <h1>¡Gracias por tu compra!</h1>
+    <p class="lead">Solo falta un paso: tus datos de nacimiento.</p>
+  </div>
+
+  <div class="aviso">
+    <div class="icono">⏳</div>
+    <h4>Tu carta tarda hasta 24 horas</h4>
+    <p>La carta astral y la guía de tránsitos requieren un proceso astronómico personalizado. No es un PDF automático: cada carta se calcula y se revisa. Te la enviaré en menos de 24 horas.</p>
+  </div>
+
+  <!-- Formulario de datos -->
+  <div class="formulario" id="formulario">
+    <h3>Completa tus datos</h3>
+    <p class="intro">Con estos datos puedo calcular tu carta.</p>
+
+    <form id="formDatos">
+      <div class="campo">
+        <label for="nombre">Nombre completo</label>
+        <input id="nombre" type="text" required placeholder="Tu nombre">
+      </div>
+
+      <div class="campo">
+        <label for="email">Email</label>
+        <input id="email" type="email" required placeholder="tu@correo.com">
+      </div>
+
+      <div class="campo">
+        <label for="fecha">Fecha de nacimiento</label>
+        <input id="fecha" type="date" required>
+      </div>
+
+      <div class="campo opcional">
+        <label for="hora">Hora de nacimiento</label>
+        <input id="hora" type="time">
+        <p class="ayuda">Si no la sabes, déjala vacía. El Ascendente no se calculará, pero el resto sí.</p>
+      </div>
+
+      <div class="campo">
+        <label for="lugar">Lugar de nacimiento</label>
+        <input id="lugar" type="text" required placeholder="Ciudad, Estado, País">
+        <p class="ayuda">Ejemplo: Guadalajara, Jalisco, México</p>
+      </div>
+
+      <div class="campo">
+        <label for="producto">Producto que compraste</label>
+        <select id="producto" required>
+          <option value="">Selecciona</option>
+          <option value="Carta Astral">Carta Astral</option>
+          <option value="Guía de Tránsitos">Guía de Tránsitos</option>
+          <option value="Pack Completo">Pack Completo</option>
+        </select>
+      </div>
+
+      <button class="btn oro" id="btnEnviar" type="submit">Enviar mis datos</button>
+      <p class="estado" id="estado"></p>
+    </form>
+  </div>
+
+  <!-- Mensaje de éxito (oculto al inicio) -->
+  <div class="exito" id="exito" style="display:none">
+    <div class="icono">✨</div>
+    <h3>¡Datos recibidos!</h3>
+    <p>Tu carta está en proceso. Te la enviaré por WhatsApp o email en menos de 24 horas.</p>
+    <a class="btn wa" id="btnWA" href="#" target="_blank" rel="noopener">
+      💬 Confirmar por WhatsApp
+    </a>
+  </div>
+
+  <a href="index.html" class="btn ghost">← Volver al inicio</a>
+</div>
+
+<script>
+// Detectar producto desde la URL (Mercado Pago puede enviar ?producto=...)
+const params = new URLSearchParams(window.location.search);
+const productoURL = params.get('producto') || '';
+
+// Pre-seleccionar producto si viene en la URL
+if (productoURL) {
+  const select = document.getElementById('producto');
+  for (let opt of select.options) {
+    if (opt.value.toLowerCase().includes(productoURL.toLowerCase()) ||
+        productoURL.toLowerCase().includes(opt.value.toLowerCase())) {
+      opt.selected = true;
+      break;
+    }
+  }
+}
+
+// Manejar envío del formulario
+document.getElementById('formDatos').addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const btn = document.getElementById('btnEnviar');
+  const estado = document.getElementById('estado');
+  btn.disabled = true;
+  estado.textContent = 'Guardando tus datos...';
+
+  const datos = {
+    nombre: document.getElementById('nombre').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    fecha: document.getElementById('fecha').value,
+    hora: document.getElementById('hora').value,
+    lugar: document.getElementById('lugar').value.trim(),
+    producto: document.getElementById('producto').value,
+    fecha_registro: new Date().toISOString(),
+    origen: 'pago_mercadopago'
+  };
+
+  // Guardar en localStorage (respaldo)
+  localStorage.setItem('esoterika_datos_pago', JSON.stringify(datos));
+
+  // Enviar a Google Sheets (si configurado)
+  try {
+    const tarot = await fetch('tarot.json').then(r => r.json());
+    const url = tarot.config?.googleSheetsUrl;
+
+    if (url && !url.includes('TU_ID')) {
+      await fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+      });
+    }
+  } catch (err) {
+    console.warn('No se pudo enviar a Google Sheets:', err);
+  }
+
+  // Mostrar éxito
+  document.getElementById('formulario').style.display = 'none';
+  document.getElementById('exito').style.display = 'block';
+
+  // Configurar botón de WhatsApp
+  const mensaje = `Hola, acabo de pagar mi ${datos.producto}. Ya llené el formulario. Mi nombre es ${datos.nombre} y mi email es ${datos.email}. ¿Me confirmas cuando tengas mi carta?`;
+  document.getElementById('btnWA').href = `https://wa.me/524424874484?text=${encodeURIComponent(mensaje)}`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lectura Premium · Esoterika Umbra Arcana</title>
+<meta name="theme-color" content="#0b0710">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0710;--vino:#5a1426;--mor:#3b1659;--oro:#c9a45c;--oro2:#8c6d34;--humo:#b9aec4;--txt:#e9e1ee;--serif:'Cinzel',serif;--cur:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at 50% 40%,rgba(59,22,89,.5),transparent 70%),var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.7;min-height:100svh;padding:40px 20px}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;letter-spacing:.06em;line-height:1.3}
+.wrap{max-width:640px;margin:0 auto}
+.center{text-align:center}
+.eyebrow{font-family:var(--serif);color:var(--oro);letter-spacing:.35em;font-size:.72rem;text-transform:uppercase;display:block;margin-bottom:16px}
+h1{font-size:clamp(1.5rem,5vw,2rem);color:#f3e7c9;margin-bottom:14px}
+.lead{font-family:var(--cur);font-style:italic;font-size:1.15rem;color:var(--humo);margin-bottom:30px}
+.confirmacion{padding:20px;border:1px solid rgba(201,164,92,.4);border-radius:6px;background:rgba(59,22,89,.3);margin-bottom:30px}
+.confirmacion p{font-size:.9rem;color:var(--humo);margin-bottom:6px}
+.confirmacion strong{color:var(--oro)}
+.lectura{padding:30px;border:1px solid rgba(201,164,92,.3);border-radius:8px;background:rgba(11,7,16,.6);margin-bottom:24px;position:relative}
+.simbolo{text-align:center;color:var(--oro);font-size:3.5rem;margin-bottom:10px}
+.lectura h2{color:var(--oro);font-size:1.6rem;text-align:center;margin-bottom:8px}
+.lectura .teaser{font-family:var(--cur);font-style:italic;color:var(--oro);font-size:1.1rem;text-align:center;margin-bottom:24px}
+.lectura h4{color:var(--oro);font-size:.8rem;margin:22px 0 8px;padding-bottom:6px;border-bottom:1px solid rgba(201,164,92,.2);text-transform:uppercase;letter-spacing:.15em}
+.lectura p{margin-bottom:12px;font-size:.95rem;color:#d9cfe2}
+.lectura ul{padding-left:22px;margin-bottom:12px}
+.lectura li{margin-bottom:8px;color:#d9cfe2;font-size:.95rem}
+.blur-content{position:relative}
+.blur-content.blurred{filter:blur(6px);user-select:none;pointer-events:none}
+.primera-linea{position:relative;z-index:2}
+.blur-content.blurred .primera-linea::after{content:"";position:absolute;bottom:-30px;left:0;right:0;height:60px;background:linear-gradient(to bottom,transparent,var(--bg));z-index:3;pointer-events:none}
+
+/* INPUT DE CÓDIGO */
+.desbloqueo{margin-top:30px;padding:30px 24px;border:2px solid var(--oro);border-radius:8px;background:linear-gradient(160deg,rgba(90,20,38,.5),rgba(11,7,16,.95));text-align:center;position:relative}
+.desbloqueo::before{content:"CÓDIGO DE VERIFICACIÓN";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--bg);font-family:var(--serif);font-size:.7rem;letter-spacing:.3em;padding:5px 16px;border-radius:3px;font-weight:700}
+.desbloqueo h3{color:var(--oro);font-size:1.3rem;margin:14px 0 12px}
+.desbloqueo p{color:var(--humo);font-size:.92rem;margin-bottom:20px;line-height:1.6}
+.codigo-input{display:flex;gap:10px;flex-direction:column;margin-bottom:16px}
+.codigo-input input{width:100%;padding:16px;border:1px solid rgba(201,164,92,.5);border-radius:4px;background:#150b1c;color:var(--oro);font-family:var(--serif);font-size:1.2rem;text-align:center;text-transform:uppercase;letter-spacing:.15em;font-weight:700}
+.codigo-input input:focus{outline:none;border-color:var(--oro);box-shadow:0 0 20px rgba(201,164,92,.3)}
+.codigo-input button{padding:16px;background:linear-gradient(135deg,var(--oro),var(--oro2));color:var(--bg);border:none;border-radius:4px;font-family:var(--serif);font-size:.85rem;letter-spacing:.2em;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all .3s}
+.codigo-input button:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(201,164,92,.5)}
+.codigo-input button:disabled{opacity:.5;cursor:not-allowed}
+.mensaje-error{color:#f87171;font-size:.85rem;margin-top:10px;min-height:20px}
+.mensaje-exito{color:#4ade80;font-size:.85rem;margin-top:10px;font-weight:600}
+
+.desbloqueado{margin-top:30px;padding:30px 24px;border:2px solid #4ade80;border-radius:8px;background:linear-gradient(160deg,rgba(74,222,128,.15),rgba(11,7,16,.95));text-align:center;position:relative}
+.desbloqueado::before{content:"✓ DESBLOQUEADO";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#4ade80;color:var(--bg);font-family:var(--serif);font-size:.7rem;letter-spacing:.3em;padding:5px 16px;border-radius:3px;font-weight:700}
+.desbloqueado h3{color:#4ade80;font-size:1.3rem;margin:14px 0 8px}
+.desbloqueado p{color:var(--humo);font-size:.92rem}
+
+.ayuda{margin-top:16px;text-align:center}
+.ayuda a{color:var(--oro2);text-decoration:none;font-size:.85rem}
+.ayuda a:hover{color:var(--oro)}
+
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;border:1px solid var(--oro);color:#f3e7c9;background:linear-gradient(135deg,rgba(90,20,38,.85),rgba(59,22,89,.85));font-family:var(--serif);letter-spacing:.2em;font-size:.8rem;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .3s;width:100%;text-decoration:none;margin-bottom:12px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(201,164,92,.35)}
+.btn.ghost{background:transparent}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="center">
+    <span class="eyebrow" id="eyebrow">Tu lectura premium</span>
+    <h1 id="saludo">LECTURA BLOQUEADA</h1>
+    <p class="lead" id="lead">Ingresa tu código de verificación para desbloquearla.</p>
+  </div>
+
+  <div class="confirmacion">
+    <p>Producto: <strong id="rProducto">—</strong></p>
+    <p>Cartas: <strong id="rCartas">—</strong></p>
+    <p>Correo: <strong id="rEmail">—</strong></p>
+  </div>
+
+  <div class="lectura" id="lectura"></div>
+
+  <div class="desbloqueo" id="desbloqueo">
+    <h3>Ingresa tu código</h3>
+    <p>Te enviamos un código por WhatsApp después de tu pago. Escríbelo aquí.</p>
+    <div class="codigo-input">
+      <input id="codigoInput" type="text" placeholder="UMBRA-XXXX" maxlength="12" autocomplete="off">
+      <button id="btnValidar">Desbloquear lectura</button>
+    </div>
+    <p class="mensaje-error" id="mensajeError"></p>
+    <p class="mensaje-exito" id="mensajeExito"></p>
+    <div class="ayuda">
+      <a href="#" id="btnAyuda">¿No recibiste tu código? Escríbenos →</a>
+    </div>
+  </div>
+
+  <div class="desbloqueado" id="desbloqueado" style="display:none">
+    <h3>✓ Lectura desbloqueada</h3>
+    <p>Tu lectura completa está activa. Disfrútala.</p>
+  </div>
+
+  <a href="index.html" class="btn ghost">Volver al inicio</a>
+</div>
+
+<script>
+let CONFIG = null;
+let TAROT = null;
+
+fetch('tarot.json').then(r => r.json()).then(data => {
+  TAROT = data;
+  CONFIG = TAROT.config;
+
+  const cartas = JSON.parse(localStorage.getItem('esoterika_cartas_premium') || '[]');
+  const producto = localStorage.getItem('esoterika_producto');
+  const email = localStorage.getItem('esoterika_email');
+  const codigoGuardado = localStorage.getItem('esoterika_codigo_aprobado');
+
+  if (!cartas.length || !producto) {
+    window.location.href = 'index.html';
+    return;
+  }
+
+  document.getElementById('rProducto').textContent = producto;
+  document.getElementById('rCartas').textContent = cartas.join(' · ');
+  document.getElementById('rEmail').textContent = email || '—';
+
+  // Construir la lectura
+  const esAmor = producto === 'Tarot del Amor';
+  const esPreguntas = producto === 'Las 3 Preguntas';
+
+  let html = '<div class="blur-content" id="blurContent">';
+
+  cartas.forEach((nombre, i) => {
+    const c = TAROT.cartas[nombre];
+    if (!c) return;
+
+    let campo = 'general';
+    if (esAmor) campo = 'amor';
+    if (esPreguntas) campo = 'trabajo';
+
+    const texto = c[campo] || c.general;
+    const primeraLinea = texto.split('.')[0] + '.';
+    const resto = texto.substring(primeraLinea.length);
+
+    html += `
+      <div class="simbolo">${c.s}</div>
+      <h2>${c.n}</h2>
+      <p class="teaser">"${c.teaser}"</p>
+      <h4>Carta ${i+1} — Interpretación</h4>
+      <p class="primera-linea">${primeraLinea}</p>
+      <p>${resto}</p>
+    `;
+
+    if (esPreguntas && c.preguntas) {
+      html += `<h4>Preguntas para reflexionar</h4><ul>${c.preguntas.map(p => '<li>' + p + '</li>').join('')}</ul>`;
+    }
+  });
+
+  html += `<h4>Consejo del oráculo</h4>`;
+  html += `<p>${TAROT.cartas[cartas[0]]?.consejo || ''}</p>`;
+  html += `<h4>Advertencia</h4>`;
+  html += `<p>${TAROT.cartas[cartas[0]]?.advertencia || ''}</p>`;
+
+  const signo = localStorage.getItem('esoterika_signo');
+  if (signo && TAROT.signos[signo]) {
+    html += `<h4>Reflexión para tu signo (${signo})</h4><p>${TAROT.signos[signo]}</p>`;
+  }
+
+  html += '</div>';
+
+  document.getElementById('lectura').innerHTML = html;
+
+  // Si ya había código aprobado antes, desbloquear automáticamente
+  if (codigoGuardado && codigoAprobado(codigoGuardado)) {
+    desbloquear();
+  } else {
+    // Aplicar blur después de 2 segundos
+    setTimeout(() => {
+      document.getElementById('blurContent').classList.add('blurred');
+    }, 2000);
+  }
+
+  // Configurar ayuda por WhatsApp
+  const mensajeAyuda = `Hola, pagué la lectura "${producto}" y aún no recibí mi código de verificación. Mi correo es: ${email || '[correo]'}. ¿Me pueden ayudar?`;
+  document.getElementById('btnAyuda').href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(mensajeAyuda)}`;
+  document.getElementById('btnAyuda').target = '_blank';
+
+  // Configurar validación
+  document.getElementById('btnValidar').onclick = validarCodigo;
+  document.getElementById('codigoInput').addEventListener('keypress', e => {
+    if (e.key === 'Enter') validarCodigo();
+  });
+});
+
+function codigoAprobado(codigo) {
+  if (!codigo || !TAROT.codigos_aprobados) return false;
+  const codigoLimpio = codigo.toUpperCase().trim();
+  return TAROT.codigos_aprobados.some(c => c.codigo.toUpperCase() === codigoLimpio);
+}
+
+function validarCodigo() {
+  const input = document.getElementById('codigoInput');
+  const codigo = input.value.toUpperCase().trim();
+  const error = document.getElementById('mensajeError');
+  const exito = document.getElementById('mensajeExito');
+
+  error.textContent = '';
+  exito.textContent = '';
+
+  if (!codigo) {
+    error.textContent = 'Por favor ingresa tu código.';
+    return;
+  }
+
+  if (codigo.length < 6) {
+    error.textContent = 'El código parece incompleto. Revísalo.';
+    return;
+  }
+
+  if (codigoAprobado(codigo)) {
+    exito.textContent = '✓ Código válido. Desbloqueando...';
+    localStorage.setItem('esoterika_codigo_aprobado', codigo);
+    setTimeout(desbloquear, 800);
+  } else {
+    error.textContent = 'Código no válido. Verifica que esté bien escrito o escríbenos por WhatsApp.';
+  }
+}
+
+function desbloquear() {
+  document.getElementById('blurContent').classList.remove('blurred');
+  document.getElementById('desbloqueo').style.display = 'none';
+  document.getElementById('desbloqueado').style.display = 'block';
+  document.getElementById('eyebrow').textContent = 'Tu lectura está activa';
+  document.getElementById('saludo').textContent = 'LECTURA COMPLETA';
+  document.getElementById('lead').textContent = 'Gracias por tu compra.';
+}
+</script>
+</body>
+</html>

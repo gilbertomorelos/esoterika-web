@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EsoteriKa Umbra Arcana · Tarot, Astrología y Rituales</title>
+<meta name="description" content="Lecturas de tarot, cartas astrales, tránsitos y rituales. Descubre qué dicen las cartas y el cielo sobre ti.">
+<meta name="theme-color" content="#0b0710">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0710'/%3E%3Cpath d='M40 10a24 24 0 1 0 0 44 20 20 0 1 1 0-44z' fill='%23c9a45c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0710;--bg2:#150b1c;--vino:#5a1426;--mor:#3b1659;--oro:#c9a45c;--oro2:#8c6d34;--humo:#b9aec4;--txt:#e9e1ee;--serif:'Cinzel','Times New Roman',serif;--cur:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.6;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom)}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.06em;line-height:1.2}
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+section{position:relative;padding:90px 0}
+.eyebrow{font-family:var(--serif);color:var(--oro);letter-spacing:.35em;font-size:.72rem;text-transform:uppercase;display:block;margin-bottom:16px}
+h2{font-size:clamp(1.7rem,6vw,2.7rem);color:#f3e7c9;margin-bottom:18px}
+.lead{font-family:var(--cur);font-style:italic;font-size:clamp(1.25rem,4.4vw,1.7rem);color:var(--humo)}
+.center{text-align:center}
+.rv{opacity:0;transform:translateY(26px);filter:blur(4px);transition:all 1.1s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;border:1px solid var(--oro);color:#f3e7c9;background:linear-gradient(135deg,rgba(90,20,38,.85),rgba(59,22,89,.85));font-family:var(--serif);letter-spacing:.2em;font-size:.8rem;text-decoration:none;text-transform:uppercase;overflow:hidden;cursor:pointer;border-radius:2px;transition:transform .3s,box-shadow .3s;-webkit-tap-highlight-color:transparent}
+.btn::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,235,180,.45),transparent);transform:skewX(-20deg);transition:left .7s}
+.btn:hover::after,.btn:active::after{left:130%}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(201,164,92,.35)}
+.btn.ghost{background:transparent;border-color:rgba(201,164,92,.5)}
+.btn.block{width:100%}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+#hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 0 120px;overflow:hidden;background:radial-gradient(ellipse at 50% 20%,#2a1040 0%,var(--bg) 62%)}
+#hero .wrap{position:relative;z-index:3}
+.moon{position:absolute;top:7%;left:50%;width:min(78vw,430px);aspect-ratio:1;margin-left:calc(min(78vw,430px)/-2);z-index:1;will-change:transform}
+.moon i{position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle at 38% 36%,#f7ecd0,#d9c08a 45%,#8c6d34 100%);box-shadow:0 0 90px 30px rgba(201,164,92,.28),0 0 220px 80px rgba(120,60,170,.25);animation:glow 6s ease-in-out infinite}
+.moon i::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 62% 60%,rgba(11,7,16,.55) 0 16%,transparent 17%),radial-gradient(circle at 30% 66%,rgba(11,7,16,.35) 0 9%,transparent 10%),radial-gradient(circle at 55% 25%,rgba(11,7,16,.3) 0 7%,transparent 8%)}
+.moon svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 140s linear infinite;opacity:.55}
+@keyframes glow{50%{box-shadow:0 0 120px 44px rgba(201,164,92,.38),0 0 240px 90px rgba(120,60,170,.3)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.smoke{position:absolute;left:-20%;width:140%;height:50%;bottom:-6%;z-index:2;pointer-events:none}
+.smoke b{position:absolute;bottom:0;width:60%;height:100%;border-radius:50%;background:radial-gradient(closest-side,rgba(185,174,196,.2),transparent);filter:blur(30px);animation:drift 22s ease-in-out infinite alternate}
+.smoke b:nth-child(1){left:-10%}.smoke b:nth-child(2){left:30%;animation-duration:30s;animation-delay:-8s;opacity:.8}.smoke b:nth-child(3){left:60%;animation-duration:26s;animation-delay:-14s}
+@keyframes drift{from{transform:translateX(-8%) scale(1)}to{transform:translateX(12%) translateY(-8%) scale(1.25)}}
+#pts{position:absolute;inset:0;z-index:2;pointer-events:none}
+#pts s{position:absolute;width:3px;height:3px;border-radius:50%;background:#f1dca4;box-shadow:0 0 8px #f1dca4;opacity:0;animation:float linear infinite}
+@keyframes float{10%{opacity:.9}to{transform:translateY(-120px) translateX(20px);opacity:0}}
+.candles{position:absolute;bottom:0;left:0;right:0;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;padding:0 6%;pointer-events:none}
+.candle{width:18px;background:linear-gradient(90deg,#c9b99a,#efe3c8,#b8a784);border-radius:3px 3px 0 0;position:relative}
+.candle::before{content:"";position:absolute;left:50%;top:-22px;width:11px;height:22px;margin-left:-5.5px;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;background:radial-gradient(ellipse at 50% 75%,#fff6d0,#ffb347 55%,transparent 72%);box-shadow:0 0 30px 12px rgba(255,170,60,.35);animation:flame .15s alternate infinite,flick 3s ease-in-out infinite}
+@keyframes flame{to{transform:scale(.94,1.06) rotate(1.5deg)}}
+@keyframes flick{50%{opacity:.82}}
+.sub{font-family:var(--serif);font-size:.7rem;letter-spacing:.5em;color:var(--oro);margin-bottom:20px;display:block}
+#hero h1{font-size:clamp(2.3rem,10.5vw,5rem);color:#f6ead0;text-shadow:0 0 40px rgba(0,0,0,.9);margin:22vh 0 20px}
+#hero p{max-width:480px;margin:0 auto 34px;color:var(--humo);font-family:var(--cur);font-style:italic;font-size:1.35rem;text-shadow:0 2px 14px #000}
+.ctas{display:flex;flex-direction:column;gap:14px;max-width:340px;margin:0 auto}
+.scroll{position:absolute;bottom:90px;left:50%;z-index:3;font-size:.65rem;letter-spacing:.4em;color:var(--oro2);transform:translateX(-50%);animation:bob 2.4s infinite}
+@keyframes bob{50%{transform:translate(-50%,8px)}}
+#oraculo{background:linear-gradient(var(--bg),var(--bg2) 20%,var(--bg2) 80%,var(--bg))}
+.grid{display:grid;gap:22px;margin-top:44px}
+.card{position:relative;padding:30px 24px 26px;background:linear-gradient(160deg,rgba(59,22,89,.35),rgba(11,7,16,.9));border:1px solid rgba(201,164,92,.28);text-align:center;transition:transform .5s,border-color .5s,box-shadow .5s}
+.card::before{content:"";position:absolute;inset:6px;border:1px solid rgba(201,164,92,.12);pointer-events:none}
+.card:hover{transform:translateY(-6px);border-color:var(--oro);box-shadow:0 18px 50px rgba(90,20,38,.45)}
+.card svg.ic{width:74px;height:74px;margin:0 auto 14px;stroke:var(--oro);fill:none;stroke-width:1.4;filter:drop-shadow(0 0 8px rgba(201,164,92,.5))}
+.card h3{font-size:1.15rem;color:#f3e7c9;margin-bottom:10px}
+.card p{color:var(--humo);font-size:.95rem;min-height:3.4em;margin-bottom:16px}
+.price{font-family:var(--serif);color:var(--oro);font-size:1.7rem;margin-bottom:18px}
+.price small{font-size:.7rem;letter-spacing:.2em;color:var(--oro2)}
+.card .tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--vino);color:#f3e7c9;font-family:var(--serif);font-size:.6rem;letter-spacing:.25em;padding:3px 12px;border:1px solid var(--oro);white-space:nowrap}
+#rituales{background:radial-gradient(ellipse at 50% 100%,rgba(90,20,38,.4),transparent 70%)}
+.card.rit{background:linear-gradient(160deg,rgba(90,20,38,.4),rgba(11,7,16,.92))}
+#astro{background:radial-gradient(ellipse at 50% 0%,rgba(59,22,89,.6),transparent 70%)}
+.card.astro{background:linear-gradient(160deg,rgba(59,22,89,.55),rgba(11,7,16,.92))}
+#historia{padding:110px 0}
+.story p{font-family:var(--cur);font-size:clamp(1.3rem,4.8vw,1.9rem);line-height:1.5;color:#d9cfe2;margin:0 auto 46px;max-width:620px;text-align:center}
+.story em{color:var(--oro);font-style:italic}
+.divider{width:46px;height:46px;margin:0 auto 46px;display:block;stroke:var(--oro2);fill:none;stroke-width:1.3;opacity:.8}
+#elige{background:radial-gradient(ellipse at 50% 40%,rgba(59,22,89,.5),transparent 70%)}
+.deck{display:flex;justify-content:center;gap:12px;margin:40px 0 24px;perspective:1000px}
+.pick{width:min(29vw,150px);aspect-ratio:2/3.3;border:0;background:none;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.3,.7,.2,1),opacity .8s,filter .8s;-webkit-tap-highlight-color:transparent}
+.pick .f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--oro);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:8px;text-align:center}
+.pick .back{background:repeating-linear-gradient(45deg,rgba(201,164,92,.07) 0 6px,transparent 6px 12px),linear-gradient(160deg,var(--mor),#14061f);box-shadow:inset 0 0 0 5px #0b0710,inset 0 0 0 6px rgba(201,164,92,.5)}
+.pick .back svg{width:52%;stroke:var(--oro);fill:none;stroke-width:1.4}
+.pick .front{transform:rotateY(180deg);background:linear-gradient(160deg,#2a1040,var(--vino));box-shadow:0 0 40px rgba(201,164,92,.4)}
+.pick .front b{font-family:var(--serif);font-size:clamp(.62rem,2.8vw,.9rem);color:#f3e7c9;letter-spacing:.1em}
+.pick .front span{font-size:2.1rem;color:var(--oro)}
+.deck:not(.done) .pick:hover{transform:translateY(-12px) rotate(-1.5deg);filter:drop-shadow(0 0 18px rgba(201,164,92,.5))}
+.pick.flip{transform:rotateY(180deg) translateY(-8px)}
+.deck.done .pick:not(.flip){opacity:.25;filter:grayscale(1)}
+#msg{min-height:140px;max-width:520px;margin:0 auto;opacity:0;transform:translateY(14px);transition:all 1s .7s}
+#msg.on{opacity:1;transform:none}
+#msg h3{color:var(--oro);font-size:1.5rem;margin-bottom:8px}
+#msg p{font-family:var(--cur);font-style:italic;font-size:1.5rem;color:#f3e7c9;margin-bottom:22px}
+#msg .btn{max-width:340px}
+#final{text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(90,20,38,.5),transparent 70%)}
+#final h2{font-size:clamp(1.8rem,7vw,3.2rem);max-width:700px;margin:0 auto 30px}
+footer{padding:50px 0 40px;text-align:center;border-top:1px solid rgba(201,164,92,.15)}
+footer .soc{display:flex;gap:22px;justify-content:center;margin-bottom:22px}
+footer a{color:var(--oro);font-family:var(--serif);font-size:.7rem;letter-spacing:.25em;text-decoration:none;text-transform:uppercase}
+.disc{font-size:.72rem;color:#7d7387;max-width:520px;margin:0 auto;line-height:1.6}
+@media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr)}.ctas{flex-direction:row;max-width:none;justify-content:center}.deck{gap:28px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}.rv{opacity:1;transform:none;filter:none}}
+.lectura-basica-wrap{max-width:420px;margin:34px auto 0}
+.lectura-basica-ayuda{margin-top:12px;color:var(--humo);font-family:var(--cur);font-size:1.15rem}
+
+/* Testimonios */
+#testimonios{background:linear-gradient(var(--bg),var(--bg2))}
+.testimonios{display:grid;gap:18px;margin-top:34px}
+@media(min-width:760px){.testimonios{grid-template-columns:repeat(3,1fr)}}
+.testimonio{padding:24px 20px;background:rgba(59,22,89,.25);border:1px solid rgba(201,164,92,.2);border-radius:4px;font-family:var(--cur);font-style:italic;color:var(--humo);font-size:1.05rem;line-height:1.6}
+.testimonio cite{display:block;margin-top:14px;font-family:var(--serif);font-style:normal;color:var(--oro);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}
+
+/* Modal de lectura difuminada */
+.lectura-modal[hidden]{display:none!important}
+.lectura-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(5,3,9,.88);overflow-y:auto}
+.lectura-panel{position:relative;width:min(100%,520px);max-height:92svh;overflow-y:auto;padding:34px 25px 26px;border:1px solid var(--oro);background:linear-gradient(160deg,#21132e,#0b0710);box-shadow:0 20px 70px #000;border-radius:5px;text-align:left}
+.lectura-panel .eyebrow{text-align:center;margin-top:6px}
+.lectura-panel h2{text-align:center;font-size:clamp(1.5rem,5vw,2rem)}
+.lectura-intro{text-align:center;color:var(--humo);margin-bottom:20px}
+.cerrar-lectura{position:absolute;top:7px;right:12px;border:0;background:transparent;color:var(--oro);font-size:32px;cursor:pointer}
+
+/* Contenido difuminado */
+.lectura-difuminada{position:relative;margin:18px 0;padding:20px;border-radius:6px;background:rgba(11,7,16,.6);border:1px solid rgba(201,164,92,.2);overflow:hidden}
+.lectura-difuminada .texto{filter:blur(5px);user-select:none;pointer-events:none;color:var(--humo);line-height:1.7;font-family:var(--cur);font-size:1.05rem;white-space:pre-wrap}
+.lectura-difuminada .candado{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,transparent,rgba(11,7,16,.85));text-align:center;padding:16px}
+.lectura-difuminada .candado span{font-size:2rem;margin-bottom:8px}
+.lectura-difuminada .candado p{font-family:var(--serif);color:var(--oro);font-size:.85rem;letter-spacing:.1em}
+
+/* Selector de lectura */
+.selector-lectura{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 20px}
+.opcion-lectura{position:relative;padding:14px 8px;border:1px solid rgba(201,164,92,.35);border-radius:6px;background:rgba(59,22,89,.2);cursor:pointer;text-align:center;transition:all .25s;-webkit-tap-highlight-color:transparent}
+.opcion-lectura:hover{border-color:rgba(201,164,92,.7);background:rgba(59,22,89,.35)}
+.opcion-lectura.seleccionada{border-color:var(--oro);background:rgba(90,20,38,.45);box-shadow:0 0 18px rgba(201,164,92,.3)}
+.opcion-lectura.seleccionada::after{content:"✓";position:absolute;top:4px;right:6px;color:var(--oro);font-size:.85rem;font-weight:bold}
+.opcion-lectura .icono{font-size:1.5rem;display:block;margin-bottom:4px}
+.opcion-lectura .nombre{font-family:var(--serif);font-size:.72rem;color:#f3e7c9;letter-spacing:.05em;line-height:1.2;display:block;margin-bottom:4px}
+.opcion-lectura .precio{font-family:var(--serif);font-size:.85rem;color:var(--oro);display:block}
+.nota{font-size:.75rem;color:var(--humo);text-align:center;margin-top:10px}
+@media(max-width:380px){.selector-lectura{grid-template-columns:1fr}}
+@media(max-width:480px){.lectura-panel{padding:32px 18px 22px}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="pent" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/><path d="M50 8 78 90 8 38h84L22 90z"/></symbol>
+<symbol id="eye" viewBox="0 0 100 100"><path d="M6 50Q50 10 94 50Q50 90 6 50z"/><circle cx="50" cy="50" r="14"/><circle cx="50" cy="50" r="4"/><path d="M50 2v12M22 14l7 10M78 14l-7 10"/></symbol>
+<symbol id="moonic" viewBox="0 0 100 100"><path d="M64 10A40 40 0 1 0 64 90 32 32 0 1 1 64 10z"/><path d="M80 30l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></symbol>
+<symbol id="sunmoon" viewBox="0 0 100 100"><circle cx="50" cy="50" r="18"/><path d="M50 8v14M50 78v14M8 50h14M78 50h14M20 20l10 10M70 70l10 10M80 20 70 30M30 70 20 80"/></symbol>
+<symbol id="shield" viewBox="0 0 100 100"><path d="M50 8 84 22v28c0 22-16 36-34 44C32 86 16 72 16 50V22z"/><path d="M50 30v40M32 48h36"/></symbol>
+<symbol id="coin" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="28"/><path d="M50 30v40M40 40q10-8 20 0t-20 20q10 8 20 0"/></symbol>
+<symbol id="heart" viewBox="0 0 100 100"><path d="M50 86C20 62 10 44 10 31a21 21 0 0 1 40-8 21 21 0 0 1 40 8c0 13-10 31-40 55z"/><path d="M50 30v30"/></symbol>
+<symbol id="cards" viewBox="0 0 100 100"><rect x="22" y="14" width="40" height="64" rx="4" transform="rotate(-12 42 46)"/><rect x="38" y="20" width="40" height="64" rx="4" transform="rotate(10 58 52)"/><path d="M58 40l4 9 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z"/></symbol>
+<symbol id="zodiac" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42"/><path d="M30 70 L50 25 L70 70 M38 55 H62"/><circle cx="50" cy="50" r="4" fill="currentColor"/></symbol>
+<symbol id="tránsito" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30"/><path d="M50 20v10M50 70v10M20 50h10M70 50h10"/><circle cx="50" cy="50" r="6" fill="currentColor"/><path d="M75 25l-8 8M25 75l8-8"/></symbol>
+</svg>
+
+<header id="hero">
+  <div class="moon" id="moon"><i></i><svg viewBox="0 0 100 100" stroke="#c9a45c" fill="none" stroke-width=".25"><use href="#pent"/><circle cx="50" cy="50" r="49"/></svg></div>
+  <div id="pts"></div>
+  <div class="smoke"><b></b><b></b><b></b></div>
+  <div class="candles"><div class="candle" style="height:70px"></div><div class="candle" style="height:42px;margin-left:-60px"></div><div class="candle" style="height:56px;margin-left:auto"></div><div class="candle" style="height:84px"></div></div>
+  <div class="wrap">
+    <span class="sub" id="brandTop"></span>
+    <h1>Algunas respuestas<br>están ocultas</h1>
+    <p>El destino deja señales. Pocos saben leerlas.</p>
+    <div class="ctas">
+      <a class="btn" href="#elige">Descubrir mi mensaje</a>
+      <a class="btn ghost" href="#astro">Ver cartas astrales</a>
+    </div>
+  </div>
+  <div class="scroll">▼</div>
+</header>
+
+<main>
+<section id="oraculo">
+  <div class="wrap center">
+    <span class="eyebrow rv">I · Las cartas hablan</span>
+    <h2 class="rv">EL ORÁCULO</h2>
+    <p class="lead rv">Las cartas no deciden tu destino.<br>Revelan aquello que quizá todavía no estás dispuesto a mirar.</p>
+    <div class="grid" id="readings"></div>
+  </div>
+</section>
+
+<section id="astro">
+  <div class="wrap center">
+    <span class="eyebrow rv">II · El cielo también habla</span>
+    <h2 class="rv">ASTROLOGÍA</h2>
+    <p class="lead rv">Tu carta natal no predice. Describe.<br>Y a veces, describirte es el primer paso para cambiar.</p>
+    <div class="grid" id="astroProducts"></div>
+  </div>
+</section>
+
+<section id="historia">
+  <div class="wrap story">
+    <span class="eyebrow center rv" style="text-align:center">III · Lo que ocultan las cartas</span>
+    <svg class="divider rv"><use href="#eye"/></svg>
+    <p class="rv">Durante siglos, quienes consultan las cartas no buscan solamente respuestas.<br><em>Buscan señales.</em></p>
+    <p class="rv">Una palabra que llega a destiempo. Un nombre que vuelve. Una intuición que no se calla a las tres de la mañana.</p>
+    <p class="rv">Las cartas nunca prometieron el futuro. Prometieron algo más incómodo: <em>espejo</em>.</p>
+    <p class="rv">Y quien se mira de verdad, casi siempre descubre que ya sabía la mitad de lo que venía a preguntar.</p>
+    <svg class="divider rv"><use href="#moonic"/></svg>
+  </div>
+</section>
+
+<section id="elige">
+  <div class="wrap center">
+    <span class="eyebrow rv">IV · Un regalo del oráculo</span>
+    <h2 class="rv">ELIGE UNA CARTA</h2>
+    <p class="lead rv">Respira. No pienses demasiado.<br>Toca la que te llame.</p>
+    <div class="deck" id="deck"></div>
+    <div id="msg"></div>
+    <button class="btn ghost" id="again" style="display:none;margin-top:18px">Elegir otra vez</button>
+
+    <div class="lectura-basica-wrap rv">
+      <button class="btn block btn-abrir-lectura" type="button">✧ Quiero mi lectura completa</button>
+      <p class="lectura-basica-ayuda">Desbloquea tu lectura personalizada de 3 cartas.</p>
+    </div>
+  </div>
+</section>
+
+<section id="rituales">
+  <div class="wrap center">
+    <span class="eyebrow rv">V · Lo que se hace en silencio</span>
+    <h2 class="rv">RITUALES</h2>
+    <p class="lead rv">Hay intenciones que necesitan algo más que palabras.</p>
+    <div class="grid" id="rituals"></div>
+  </div>
+</section>
+
+<section id="testimonios">
+  <div class="wrap center">
+    <span class="eyebrow rv">VI · Lo que dicen quienes ya lo vivieron</span>
+    <h2 class="rv">SEÑALES RECIBIDAS</h2>
+    <p class="lead rv">Historias de quienes se atrevieron a mirar.</p>
+    <div class="testimonios" id="testimoniosList"></div>
+  </div>
+</section>
+
+<section id="final">
+  <div class="wrap">
+    <svg class="divider rv" style="width:70px;height:70px"><use href="#pent"/></svg>
+    <h2 class="rv">¿QUIERES SABER QUÉ DICEN LAS CARTAS Y EL CIELO SOBRE TI?</h2>
+    <p class="lead rv" style="margin-bottom:34px">Ya diste el primer paso. Lo demás está esperando.</p>
+    <button class="btn rv btn-abrir-lectura" type="button">Quiero mi lectura</button>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="soc" id="social"></div>
+    <p class="disc">Las lecturas, cartas astrales y rituales se ofrecen con fines de entretenimiento, reflexión personal y tradición esotérica. No sustituyen asesoría médica, legal, financiera o profesional.</p>
+    <p class="disc" style="margin-top:12px">© <span id="yr"></span> <span id="brandFoot"></span></p>
+  </div>
+</footer>
+
+<!-- ===== MODAL DE LECTURA DIFUMINADA ===== -->
+<div class="lectura-modal" id="modalLectura" hidden>
+  <div class="lectura-panel" role="dialog" aria-modal="true" aria-labelledby="tituloLectura" tabindex="-1">
+    <button class="cerrar-lectura" id="cerrarLectura" type="button" aria-label="Cerrar">×</button>
+    <span class="eyebrow">Vista previa</span>
+    <h2 id="tituloLectura">Tu lectura personalizada</h2>
+    <p class="lectura-intro" id="lecturaIntro">Esto es lo que las cartas tienen para ti. Desbloquéala para leerla completa.</p>
+
+    <div class="lectura-difuminada">
+      <div class="texto" id="textoDifuminado"></div>
+      <div class="candado">
+        <span>🔒</span>
+        <p>CONTENIDO BLOQUEADO</p>
+      </div>
+    </div>
+
+    <h4 style="color:var(--oro);font-family:var(--serif);text-align:center;margin-bottom:12px" id="selectorTitulo">Elige tu lectura</h4>
+
+    <div class="selector-lectura" id="selectorLectura"></div>
+
+    <button class="btn block" id="btnComprar" type="button" disabled>Elige una lectura primero</button>
+    <p class="nota">Pago seguro · Mercado Pago</p>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIGURACIÓN
+   ============================================================ */
+const CONFIG = {
+  brand: "Esoterika Umbra Arcana",
+  currency: "MXN",
+
+  mercadoPagoLinks: {
+    "Tarot General": "https://mpago.la/1MoXPMn",
+    "Tarot del Amor": "https://mpago.la/1MoXPMn",
+    "Las 3 Preguntas": "https://mpago.la/1MoXPMn",
+    "Carta Astral": "https://mpago.la/1JG3ugz",
+    "Guía de Tránsitos": "https://mpago.la/25s9JQk",
+    "Pack Carta + Tránsitos": "https://mpago.la/1dL8mS1"
+  },
+
+  social: {
+    Instagram: "https://instagram.com/",
+    TikTok: "https://tiktok.com/",
+    Facebook: "https://facebook.com/"
+  },
+
+  readings: [
+    { name: "Tarot General", price: 99, icon: "cards", desc: "Una lectura para descubrir qué energías rodean tu presente." },
+    { name: "Tarot del Amor", price: 99, icon: "heart", tag: "El más consultado", desc: "Lo que siente. Lo que calla. Lo que podría estar oculto." },
+    { name: "Las 3 Preguntas", price: 99, icon: "eye", desc: "Tres preguntas. Tres respuestas. Una lectura personalizada." }
+  ],
+
+  astroProducts: [
+    { name: "Carta Natal", price: 229, icon: "zodiac", tag: "El más completo", desc: "Tu mapa natal completo: Sol, Luna, Ascendente, casas, aspectos y dirección de crecimiento." },
+    { name: "Guía de Tránsitos", price: 129, icon: "tránsito", tag: "Guía diaria · semanal · mensual", desc: "Lo que el cielo activa en tu carta hoy: qué energía trae el día y cómo aprovecharla." },
+    { name: "Pack Carta + Tránsitos", price: 329, icon: "sunmoon", tag: "AHORRA CON EL PACK", desc: "Tu carta natal completa + tu guía de tránsitos. El mapa y la brújula del día." }
+  ],
+
+  rituals: [
+    { name: "Ritual de Amor", price: null, icon: "heart", desc: "Para abrir caminos, atraer o sanar los lazos del corazón." },
+    { name: "Ritual de Protección", price: null, icon: "shield", desc: "Para cerrar puertas a lo que drena y blindar tu energía." },
+    { name: "Ritual de Prosperidad", price: null, icon: "coin", desc: "Para despertar la abundancia y mover lo que está estancado." }
+  ],
+
+  testimonios: [
+    { texto: "No esperaba que me describiera tan bien. La carta natal me dio un mapa que no sabía que necesitaba.", autor: "María G." },
+    { texto: "La guía de tránsitos me ayudó a entender por qué estaba tan sensible esa semana. Muy clara y muy útil.", autor: "Carlos R." },
+    { texto: "Pedí el pack y valió cada peso. La carta para conocerme y los tránsitos para saber qué hacer con eso.", autor: "Ana L." }
+  ],
+
+  cardMessages: [
+    { n: "El Loco", s: "∞", t: "Una nueva etapa comienza cuando te atreves a dar el primer paso." },
+    { n: "El Mago", s: "✧", t: "Tienes más herramientas de las que crees. Es momento de utilizarlas." },
+    { n: "La Sacerdotisa", s: "☽", t: "Tu intuición ya sabe la respuesta. Deja de pedir permiso." },
+    { n: "La Emperatriz", s: "♛", t: "Algo en lo que has invertido tiempo y energía está listo para crecer." },
+    { n: "El Emperador", s: "♜", t: "Es momento de poner orden y construir sobre bases firmes." },
+    { n: "El Hierofante", s: "✦", t: "Una enseñanza importante puede aparecer donde menos la esperas." },
+    { n: "Los Enamorados", s: "♡", t: "Una decisión del corazón te está esperando. Ya la sientes." },
+    { n: "El Carro", s: "➤", t: "Deja de esperar las condiciones perfectas. Decide hacia dónde avanzar." },
+    { n: "La Justicia", s: "⚖", t: "Mira los hechos con honestidad. Una decisión necesita equilibrio." },
+    { n: "El Ermitaño", s: "✧", t: "Necesitas silencio para escuchar lo que has estado evitando." },
+    { n: "La Rueda de la Fortuna", s: "☸", t: "Las circunstancias cambian. Prepárate para reconocer una nueva oportunidad." },
+    { n: "La Fuerza", s: "♌", t: "No todo se conquista luchando. A veces, la verdadera fuerza es mantener la calma." },
+    { n: "El Colgado", s: "⏳", t: "Quizá no necesitas avanzar más rápido, sino mirar desde otro ángulo." },
+    { n: "La Muerte", s: "🜍", t: "Cerrar un ciclo también es una forma de abrirle espacio a lo nuevo." },
+    { n: "La Templanza", s: "⚗", t: "No necesitas resolverlo todo hoy. Encuentra tu propio ritmo." },
+    { n: "El Diablo", s: "⛧", t: "Observa qué deseo, hábito o temor está decidiendo por ti." },
+    { n: "La Torre", s: "⚡", t: "Algo se derrumba para que por fin puedas construir lo verdadero." },
+    { n: "La Estrella", s: "✦", t: "Lo que esperas ya está en camino. No sueltes la fe." },
+    { n: "La Luna", s: "☾", t: "Hay algo que todavía no estás viendo con claridad." },
+    { n: "El Sol", s: "☀", t: "Reconoce lo que sí está funcionando. La claridad comienza ahí." },
+    { n: "El Juicio", s: "♢", t: "Una verdad que has postergado merece por fin tu atención." },
+    { n: "El Mundo", s: "◎", t: "Has llegado más lejos de lo que reconoces. Date permiso de cerrar el ciclo." }
+  ],
+
+  astroMessages: [
+    "☉ Sol en Piscis · Casa 10\nTu esencia es sensibilidad y trascendencia: intuyes lo que otros no ven, sueñas despierto, conectas con lo invisible.",
+    "☽ Luna en Cáncer · Casa 2\nTus emociones son profundas y protectoras: el hogar es tu refugio, la familia tu raíz. Sientes con el cuerpo.",
+    "ASC Ascendente en Géminis\nTe presentas con curiosidad y palabra: llegas conversando, preguntando, conectando.",
+    "☿ Mercurio en Aries · Casa 11\nHablas directo, rápido, sin rodeos. A veces impulsivo, pero siempre honesto.",
+    "♀ Venus en Aries · Casa 11\nAmas con pasión y conquista: te enamoras rápido, con intensidad, sin miedo.",
+    "♂ Marte en Cáncer · Casa 2\nActúas con protección y emoción: defiendes a los tuyos con uñas y dientes.",
+    "♃ Júpiter en Géminis · Casa 1\nTu expansión es mental: creces cuando aprendes, conversas, conectas ideas y personas.",
+    "♄ Saturno en Leo · Casa 3\nTu estructura se forja en la expresión: aprendes a brillar cuando trabajas tu creatividad con constancia.",
+    "♅ Urano en Escorpio · Casa 6\nTu despertar es profundo: te liberas cuando sueltas el control y te permites transformar.",
+    "♆ Neptuno en Sagitario · Casa 7\nTu espiritualidad es expansiva: conectas con lo invisible cuando buscas sentido y horizonte.",
+    "♇ Plutón en Libra · Casa 5\nTu poder se forja en la relación: transformas cuando sueltas vínculos que ya no te representan."
+  ]
+};
+
+const money = p => p == null ? `<small>CONSULTA TU RITUAL</small>` : `$${p} <small>${CONFIG.currency}</small>`;
+
+document.title = `${CONFIG.brand} · Tarot, Astrología y Rituales`;
+brandTop.textContent = CONFIG.brand.toUpperCase();
+brandFoot.textContent = CONFIG.brand;
+yr.textContent = new Date().getFullYear();
+
+/* Render de tarjetas */
+readings.innerHTML = CONFIG.readings.map(x => `
+  <article class="card rv">
+    ${x.tag ? `<span class="tag">${x.tag}</span>` : ''}
+    <svg class="ic" viewBox="0 0 100 100"><use href="#${x.icon}"/></svg>
+    <h3>${x.name}</h3>
+    <p>${x.desc}</p>
+    <div class="price">${money(x.price)}</div>
+    <button class="btn block btn-abrir-lectura" type="button" data-producto="${x.name}">Solicitar lectura</button>
+  </article>
+`).join('');
+
+astroProducts.innerHTML = CONFIG.astroProducts.map(x => `
+  <article class="card astro rv">
+    ${x.tag ? `<span class="tag">${x.tag}</span>` : ''}
+    <svg class="ic" viewBox="0 0 100 100"><use href="#${x.icon}"/></svg>
+    <h3>${x.name}</h3>
+    <p>${x.desc}</p>
+    <div class="price">${money(x.price)}</div>
+    <button class="btn block btn-abrir-lectura" type="button" data-producto="${x.name}">Solicitar ${x.name.toLowerCase()}</button>
+  </article>
+`).join('');
+
+rituals.innerHTML = CONFIG.rituals.map(x => `
+  <article class="card rit rv">
+    <svg class="ic" viewBox="0 0 100 100"><use href="#${x.icon}"/></svg>
+    <h3>${x.name}</h3>
+    <p>${x.desc}</p>
+    <div class="price">${money(x.price)}</div>
+    <button class="btn block btn-abrir-lectura" type="button" data-producto="${x.name}">Consultar ritual</button>
+  </article>
+`).join('');
+
+testimoniosList.innerHTML = CONFIG.testimonios.map(t => `
+  <blockquote class="testimonio rv">
+    "${t.texto}"
+    <cite>— ${t.autor}</cite>
+  </blockquote>
+`).join('');
+
+social.innerHTML = Object.entries(CONFIG.social).map(([k, v]) => `<a href="${v}" target="_blank" rel="noopener">${k}</a>`).join('');
+
+/* ============================================================
+   CARTAS DEL ORÁCULO
+   ============================================================ */
+const back = `<svg viewBox="0 0 100 100"><use href="#sunmoon"/></svg>`;
+const deck = document.getElementById('deck'), msg = document.getElementById('msg'), again = document.getElementById('again');
+
+function dealCards() {
+  deck.className = 'deck'; msg.className = ''; msg.innerHTML = ''; again.style.display = 'none';
+  const pool = [...CONFIG.cardMessages].sort(() => Math.random() - .5).slice(0, 3);
+  deck.innerHTML = pool.map((c, i) => `<button class="pick" aria-label="Carta ${i + 1}" data-i="${i}"><div class="f back">${back}</div><div class="f front"><span>${c.s}</span><b>${c.n.toUpperCase()}</b></div></button>`).join('');
+  deck.querySelectorAll('.pick').forEach(el => el.onclick = () => {
+    if (deck.classList.contains('done')) return;
+    const c = pool[el.dataset.i];
+    deck.classList.add('done'); el.classList.add('flip');
+    msg.innerHTML = `<h3>${c.n}</h3><p>${c.t}</p><button class="btn block" type="button" id="btnPedirDatos">Quiero saber más sobre mi carta</button>`;
+    msg.classList.add('on');
+    setTimeout(() => again.style.display = 'inline-flex', 1800);
+  });
+}
+again.onclick = dealCards;
+dealCards();
+
+// Cuando el cliente hace click en "Quiero saber más sobre mi carta"
+document.addEventListener('click', e => {
+  if (e.target.id === 'btnPedirDatos') {
+    const cartaElegida = msg.querySelector('h3')?.textContent || '';
+    localStorage.setItem('esoterika_carta', cartaElegida);
+    localStorage.setItem('esoterika_tipo', 'gratis');
+    window.location.href = 'registro.html?tipo=gratis';
+  }
+});
+
+/* ============================================================
+   MODAL DE LECTURA DIFUMINADA (INTELIGENTE)
+   ============================================================ */
+(() => {
+  const $id = id => document.getElementById(id);
+  const modalLectura = $id('modalLectura');
+  const selectorLectura = $id('selectorLectura');
+  const btnComprar = $id('btnComprar');
+  const textoDifuminado = $id('textoDifuminado');
+  const lecturaIntro = $id('lecturaIntro');
+  const tituloLectura = $id('tituloLectura');
+  const selectorTitulo = $id('selectorTitulo');
+
+  let productoSeleccionado = null;
+
+  const productosTarot = CONFIG.readings.map(r => ({
+    nombre: r.name, precio: r.price, icono: r.icon === 'cards' ? '🃏' : r.icon === 'heart' ? '♡' : '👁', tipo: 'tarot'
+  }));
+  const productosAstro = CONFIG.astroProducts.map(p => ({
+    nombre: p.name, precio: p.price,
+    icono: p.icon === 'zodiac' ? '♈' : p.icon === 'tránsito' ? '☉' : '✧', tipo: 'astro'
+  }));
+
+  function generarTextoDifuminado(tipo) {
+    if (tipo === 'astro') {
+      const seleccion = [...CONFIG.astroMessages].sort(() => Math.random() - .5).slice(0, 3);
+      return seleccion.join('\n\n');
+    }
+    const cartas = [...CONFIG.cardMessages].sort(() => Math.random() - .5).slice(0, 3);
+    const posiciones = ['🌙 Pasado', '☀️ Presente', '⭐ Futuro'];
+    return cartas.map((c, i) => `${posiciones[i]}: ${c.n}\n${c.t}`).join('\n\n');
+  }
+
+  function renderSelector(tipo) {
+    let lista;
+    if (tipo === 'tarot') {
+      lista = productosTarot;
+      selectorTitulo.textContent = 'Elige tu lectura de tarot';
+      lecturaIntro.textContent = 'Esto es lo que las cartas tienen para ti. Desbloquéala para leerla completa.';
+      tituloLectura.textContent = 'Tu lectura personalizada';
+    } else if (tipo === 'astro') {
+      lista = productosAstro;
+      selectorTitulo.textContent = 'Elige tu producto de astrología';
+      lecturaIntro.textContent = 'Así se ve una carta real. Desbloquea la tuya para leerla completa.';
+      tituloLectura.textContent = 'Tu mapa natal personalizado';
+    } else {
+      lista = [...productosTarot, ...productosAstro];
+      selectorTitulo.textContent = 'Elige tu lectura';
+      lecturaIntro.textContent = 'Elige lo que más resuene contigo.';
+      tituloLectura.textContent = 'Tu lectura personalizada';
+    }
+
+    selectorLectura.innerHTML = lista.map(p => `
+      <button class="opcion-lectura" type="button" data-producto="${p.nombre}" data-precio="${p.precio}">
+        <span class="icono">${p.icono}</span>
+        <span class="nombre">${p.nombre}</span>
+        <span class="precio">$${p.precio}</span>
+      </button>
+    `).join('');
+
+    selectorLectura.querySelectorAll('.opcion-lectura').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectorLectura.querySelectorAll('.opcion-lectura').forEach(b => b.classList.remove('seleccionada'));
+        btn.classList.add('seleccionada');
+        productoSeleccionado = btn.dataset.producto;
+        const precio = btn.dataset.precio;
+        btnComprar.disabled = false;
+        btnComprar.textContent = `Comprar ${productoSeleccionado} — $${precio} MXN`;
+      });
+    });
+  }
+
+  function abrirModal(productoSugerido) {
+    let tipo = null;
+    if (productoSugerido) {
+      const esAstro = CONFIG.astroProducts.some(p => p.name === productoSugerido);
+      tipo = esAstro ? 'astro' : 'tarot';
+    }
+    textoDifuminado.textContent = generarTextoDifuminado(tipo);
+    renderSelector(tipo);
+    modalLectura.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function cerrarModal() {
+    modalLectura.hidden = true;
+    document.body.style.overflow = '';
+    selectorLectura.querySelectorAll('.opcion-lectura').forEach(b => b.classList.remove('seleccionada'));
+    productoSeleccionado = null;
+    btnComprar.disabled = true;
+    btnComprar.textContent = 'Elige una lectura primero';
+  }
+
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-abrir-lectura');
+    if (btn) abrirModal(btn.dataset.producto || null);
+  });
+
+  $id('cerrarLectura').addEventListener('click', cerrarModal);
+  modalLectura.addEventListener('click', e => { if (e.target === modalLectura) cerrarModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !modalLectura.hidden) cerrarModal();
+  });
+
+  btnComprar.addEventListener('click', () => {
+    if (!productoSeleccionado) return;
+    const link = CONFIG.mercadoPagoLinks[productoSeleccionado];
+    if (link && !link.includes('TU_LINK')) {
+      window.location.href = link;
+    } else {
+      alert(`El link de pago para "${productoSeleccionado}" aún no está configurado.`);
+    }
+  });
+})();
+
+/* ============================================================
+   PARTÍCULAS Y ANIMACIONES
+   ============================================================ */
+const pts = document.getElementById('pts');
+for (let i = 0; i < 24; i++) {
+  const s = document.createElement('s');
+  s.style.cssText = `left:${Math.random() * 100}%;top:${30 + Math.random() * 65}%;animation-duration:${6 + Math.random() * 8}s;animation-delay:${-Math.random() * 10}s`;
+  pts.appendChild(s);
+}
+
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+}), { threshold: .15 });
+document.querySelectorAll('.rv').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * .12 + 's';
+  io.observe(el);
+});
+
+const moon = document.getElementById('moon');
+let tick = false;
+addEventListener('scroll', () => {
+  if (!tick) {
+    tick = true;
+    requestAnimationFrame(() => {
+      moon.style.transform = `translateY(${scrollY * .35}px)`;
+      tick = false;
+    });
+  }
+}, { passive: true });
+</script>
+</body>
+</html>
