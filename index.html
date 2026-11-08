@@ -398,21 +398,32 @@ astroProducts.innerHTML = CONFIG.astroProducts.map(x => `
   </article>
 `).join('');
 
+// Etiquetas por ritual
+const ETIQUETAS_RITUALES = {
+  "Ritual de Amor": { texto: "EL MÁS CONSULTADO", color: "#e879a0" },
+  "Ritual de Protección": { texto: "PROTECCIÓN TOTAL", color: "#4ade80" },
+  "Ritual de Prosperidad": { texto: "ABUNDANCIA YA", color: "var(--oro)" }
+};
+
+// Renderizar los 3 rituales, cada uno con opción gratis y de pago + etiqueta
 rituals.innerHTML = CONFIG.rituals.map(x => {
-  const esPago = x.name === 'Ritual de Prosperidad';
-  const nivel = esPago ? 'avanzado' : 'gratis';
-  const tag = esPago ? 'AVANZADO +$49' : 'GRATIS';
-  const boton = esPago ? 'Quiero el ritual avanzado' : 'Quiero mi ritual gratis';
+  const etiqueta = ETIQUETAS_RITUALES[x.name] || { texto: "RITUAL", color: "var(--oro)" };
   return `
-  <article class="card rit rv">
-    <span class="tag">${tag}</span>
+  <article class="card rit rv" style="border-color:rgba(201,164,92,.4)">
+    <span class="tag" style="background:${etiqueta.color};color:#0b0710">${etiqueta.texto}</span>
     <svg class="ic" viewBox="0 0 100 100"><use href="#${x.icon}"/></svg>
     <h3>${x.name}</h3>
     <p>${x.desc}</p>
-    <div class="price">${money(x.price)}</div>
-    <a class="btn block" href="rituales.html?tipo=${encodeURIComponent(x.name)}&nivel=${nivel}">${boton}</a>
+    <div class="price" style="font-size:1rem;margin-bottom:14px">Elige tu nivel</div>
+    <a class="btn block" href="rituales.html?tipo=${encodeURIComponent(x.name)}&nivel=gratis" style="margin-bottom:8px">
+      Ritual básico — Gratis
+    </a>
+    <a class="btn block" href="rituales.html?tipo=${encodeURIComponent(x.name)}&nivel=avanzado" style="background:linear-gradient(135deg,var(--oro),var(--oro2));color:var(--bg);font-weight:700;border-color:var(--oro)">
+      Ritual avanzado — $49
+    </a>
   </article>
-`}).join('');
+  `;
+}).join('');
 
 testimoniosList.innerHTML = CONFIG.testimonios.map(t => `
   <blockquote class="testimonio rv">
