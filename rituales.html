@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rituales · Esoterika Umbra Arcana</title>
+<meta name="theme-color" content="#0b0710">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0710;--vino:#5a1426;--mor:#3b1659;--oro:#c9a45c;--oro2:#8c6d34;--humo:#b9aec4;--txt:#e9e1ee;--serif:'Cinzel',serif;--cur:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse at 50% 40%,rgba(59,22,89,.5),transparent 70%),var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.7;min-height:100svh;padding:40px 20px}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;letter-spacing:.06em;line-height:1.3}
+.wrap{max-width:640px;margin:0 auto}
+.center{text-align:center}
+.eyebrow{font-family:var(--serif);color:var(--oro);letter-spacing:.35em;font-size:.72rem;text-transform:uppercase;display:block;margin-bottom:16px}
+h1{font-size:clamp(1.6rem,5vw,2.2rem);color:#f3e7c9;margin-bottom:14px}
+.lead{font-family:var(--cur);font-style:italic;font-size:1.2rem;color:var(--humo);margin-bottom:30px}
+
+/* Card del ritual */
+.ritual-card{position:relative;padding:30px 24px;border:1px solid rgba(201,164,92,.4);border-radius:8px;background:linear-gradient(160deg,rgba(90,20,38,.3),rgba(11,7,16,.9));margin-bottom:24px;text-align:center}
+.ritual-card .badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--bg);font-family:var(--serif);font-size:.65rem;letter-spacing:.2em;padding:4px 16px;border-radius:3px;font-weight:700;white-space:nowrap}
+.ritual-card .badge.gratis{background:#4ade80;color:#0b0710}
+.ritual-card .badge.basico{background:#fbbf24;color:#0b0710}
+.ritual-card .badge.avanzado{background:var(--vino);color:#f3e7c9;border:1px solid var(--oro)}
+.ritual-card .icono{font-size:3.5rem;margin-bottom:12px}
+.ritual-card h2{color:var(--oro);font-size:1.6rem;margin-bottom:12px}
+.ritual-card p{color:#d9cfe2;font-size:.95rem;margin-bottom:12px}
+.ritual-card .precio{color:var(--oro);font-family:var(--serif);font-size:1.4rem;margin-top:12px}
+
+/* Formulario */
+.formulario{padding:30px 24px;border:1px solid rgba(201,164,92,.4);border-radius:8px;background:rgba(11,7,16,.6);margin-bottom:24px}
+.formulario h3{color:var(--oro);font-size:1.2rem;margin-bottom:8px;text-align:center}
+.formulario .intro{color:var(--humo);font-size:.9rem;text-align:center;margin-bottom:24px}
+.campo{margin-bottom:18px}
+.campo label{display:block;color:#f3e7c9;font-size:.9rem;margin-bottom:6px;font-family:var(--serif)}
+.campo input,.campo select,.campo textarea{width:100%;min-height:48px;padding:12px;border:1px solid rgba(201,164,92,.5);border-radius:3px;background:#150b1c;color:var(--txt);font:inherit;font-size:.95rem}
+.campo textarea{min-height:100px;resize:vertical}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--oro);box-shadow:0 0 12px rgba(201,164,92,.3)}
+.campo .ayuda{font-size:.78rem;color:var(--oro2);margin-top:4px}
+
+/* Botones */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;border:1px solid var(--oro);color:#f3e7c9;background:linear-gradient(135deg,rgba(90,20,38,.85),rgba(59,22,89,.85));font-family:var(--serif);letter-spacing:.2em;font-size:.8rem;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .3s;width:100%;text-decoration:none;margin-bottom:12px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(201,164,92,.35)}
+.btn.wa{background:linear-gradient(135deg,#25d366,#128c7e);border-color:#25d366}
+.btn.oro{background:linear-gradient(135deg,var(--oro),var(--oro2));color:var(--bg);font-weight:700;border-color:var(--oro)}
+.btn.ghost{background:transparent}
+
+.estado{text-align:center;margin-top:14px;color:var(--oro);font-size:.88rem;min-height:20px}
+
+.exito{padding:30px 24px;border:2px solid #4ade80;border-radius:8px;background:linear-gradient(160deg,rgba(74,222,128,.1),rgba(11,7,16,.95));text-align:center;margin-bottom:24px}
+.exito .icono{font-size:3rem;margin-bottom:12px}
+.exito h3{color:#4ade80;font-size:1.3rem;margin-bottom:10px}
+.exito p{color:var(--humo);font-size:.95rem;margin-bottom:16px}
+
+.back-link{color:var(--oro2);text-decoration:none;font-size:.85rem;display:block;text-align:center;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="center">
+    <span class="eyebrow">Rituales</span>
+    <h1 id="titulo">TU RITUAL</h1>
+    <p class="lead">Un ritual no es magia. Es intención, acción y símbolo.</p>
+  </div>
+
+  <!-- Card del ritual -->
+  <div class="ritual-card" id="ritualCard"></div>
+
+  <!-- Formulario -->
+  <div class="formulario" id="formulario">
+    <h3>Cuéntame tu intención</h3>
+    <p class="intro">Con estos datos puedo preparar tu ritual y contactarte para coordinar.</p>
+
+    <form id="formRitual">
+      <div class="campo">
+        <label for="nombre">Nombre completo</label>
+        <input id="nombre" type="text" required placeholder="Tu nombre">
+      </div>
+
+      <div class="campo">
+        <label for="email">Email</label>
+        <input id="email" type="email" required placeholder="tu@correo.com">
+      </div>
+
+      <div class="campo">
+        <label for="whatsapp">WhatsApp</label>
+        <input id="whatsapp" type="tel" required placeholder="+52 442 123 4567">
+      </div>
+
+      <div class="campo">
+        <label for="intencion">¿Qué buscas con este ritual?</label>
+        <textarea id="intencion" required placeholder="Cuéntame brevemente tu intención..."></textarea>
+        <p class="ayuda">Mientras más claro seas, más enfocado será el ritual.</p>
+      </div>
+
+      <button class="btn" id="btnEnviar" type="submit">Enviar mi intención</button>
+      <p class="estado" id="estado"></p>
+    </form>
+  </div>
+
+  <!-- Mensaje de éxito -->
+  <div class="exito" id="exito" style="display:none">
+    <div class="icono">✨</div>
+    <h3 id="exitoTitulo">Intención recibida</h3>
+    <p id="exitoTexto">Ya tengo tus datos. Te contactaré por WhatsApp para coordinar los detalles de tu ritual.</p>
+    <a class="btn oro" id="btnPagar" href="#" target="_blank" rel="noopener" style="display:none">
+      Pagar $49 y recibir mi ritual avanzado
+    </a>
+    <a class="btn wa" id="btnWA" href="#" target="_blank" rel="noopener">
+      💬 Confirmar por WhatsApp
+    </a>
+  </div>
+
+  <a href="index.html" class="back-link">← Volver al inicio</a>
+</div>
+
+<script>
+// Datos de los rituales
+const RITUALES = {
+  "Ritual de Amor": {
+    icono: "♡",
+    titulo: "Ritual de Amor",
+    desc: "Para abrir caminos, atraer o sanar los lazos del corazón. Trabajamos con la energía del amor propio y la conexión con otros."
+  },
+  "Ritual de Protección": {
+    icono: "🛡️",
+    titulo: "Ritual de Protección",
+    desc: "Para cerrar puertas a lo que drena y blindar tu energía. Ideal si sientes que hay envidias, malas vibras o situaciones que te agotan."
+  },
+  "Ritual de Prosperidad": {
+    icono: "🪙",
+    titulo: "Ritual de Prosperidad",
+    desc: "Para despertar la abundancia y mover lo que está estancado. Trabajamos con la energía del dinero, el trabajo y la apertura de caminos."
+  }
+};
+
+// Leer parámetros de la URL
+const params = new URLSearchParams(window.location.search);
+const tipoRitual = params.get('tipo') || 'Ritual de Amor';
+const nivel = params.get('nivel') || 'gratis';
+
+// Configuración según nivel
+let badgeTexto, badgeClase, precioTexto, botonTexto, exitoTitulo, exitoTexto;
+
+if (nivel === 'gratis') {
+  badgeTexto = 'GRATIS';
+  badgeClase = 'gratis';
+  precioTexto = 'Gratis';
+  botonTexto = 'Enviar mi intención';
+  exitoTitulo = 'Intención recibida';
+  exitoTexto = 'Ya tengo tus datos. Te contactaré por WhatsApp para enviarte tu ritual básico.';
+} else if (nivel === 'basico') {
+  badgeTexto = 'BÁSICO';
+  badgeClase = 'basico';
+  precioTexto = 'Básico (gratis)';
+  botonTexto = 'Enviar mi intención';
+  exitoTitulo = 'Intención recibida';
+  exitoTexto = 'Ya tengo tus datos. Te contactaré por WhatsApp para enviarte tu ritual básico.';
+} else {
+  badgeTexto = 'AVANZADO +$49';
+  badgeClase = 'avanzado';
+  precioTexto = 'Avanzado — $49 MXN';
+  botonTexto = 'Enviar mi intención y pagar $49';
+  exitoTitulo = '¡Casi listo!';
+  exitoTexto = 'Ya tengo tus datos. Solo falta el pago de $49 para preparar tu ritual avanzado.';
+}
+
+// Mostrar card del ritual
+const ritual = RITUALES[tipoRitual] || RITUALES['Ritual de Amor'];
+document.getElementById('titulo').textContent = ritual.titulo.toUpperCase();
+document.getElementById('ritualCard').innerHTML = `
+  <span class="badge ${badgeClase}">${badgeTexto}</span>
+  <div class="icono">${ritual.icono}</div>
+  <h2>${ritual.titulo}</h2>
+  <p>${ritual.desc}</p>
+  <div class="precio">${precioTexto}</div>
+`;
+document.getElementById('btnEnviar').textContent = botonTexto;
+
+// Manejar el envío del formulario
+document.getElementById('formRitual').addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const btn = document.getElementById('btnEnviar');
+  const estado = document.getElementById('estado');
+  btn.disabled = true;
+  estado.textContent = 'Enviando tu intención...';
+
+  const datos = {
+    nombre: document.getElementById('nombre').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    whatsapp: document.getElementById('whatsapp').value.trim(),
+    intencion: document.getElementById('intencion').value.trim(),
+    producto: ritual.titulo,
+    nivel: nivel,
+    tipo: 'ritual',
+    origen: 'rituales_html',
+    fecha_registro: new Date().toISOString()
+  };
+
+  // Guardar en localStorage
+  localStorage.setItem('esoterika_ritual', JSON.stringify(datos));
+
+  // Enviar a Google Sheets
+  try {
+    const tarot = await fetch('tarot.json').then(r => r.json());
+    const url = tarot.config?.googleSheetsUrl;
+
+    if (url && !url.includes('TU_ID')) {
+      await fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(datos)
+      });
+    }
+  } catch (err) {
+    console.warn('No se pudo enviar a Google Sheets:', err);
+  }
+
+  // Mostrar éxito
+  document.getElementById('formulario').style.display = 'none';
+  document.getElementById('exito').style.display = 'block';
+  document.getElementById('exitoTitulo').textContent = exitoTitulo;
+  document.getElementById('exitoTexto').textContent = exitoTexto;
+
+  // Botón de WhatsApp
+  const mensaje = `Hola, quiero información sobre el ${ritual.titulo} (nivel ${nivel}). Mi nombre es ${datos.nombre} y mi intención es: ${datos.intencion}`;
+  document.getElementById('btnWA').href = `https://wa.me/524424874484?text=${encodeURIComponent(mensaje)}`;
+
+  // Si es avanzado, mostrar botón de pago
+  if (nivel === 'avanzado') {
+    const btnPagar = document.getElementById('btnPagar');
+    btnPagar.style.display = 'block';
+    btnPagar.href = 'https://mpago.la/1VnRJNM';
+  }
+});
+</script>
+</body>
+</html>

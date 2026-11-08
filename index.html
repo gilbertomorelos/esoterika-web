@@ -398,15 +398,25 @@ astroProducts.innerHTML = CONFIG.astroProducts.map(x => `
   </article>
 `).join('');
 
-rituals.innerHTML = CONFIG.rituals.map(x => `
+rituals.innerHTML = CONFIG.rituals.map(x => {
+  let nivel, boton, tag;
+  if (x.name === 'Ritual de Amor') {
+    nivel = 'gratis'; boton = 'Quiero mi ritual gratis'; tag = 'GRATIS';
+  } else if (x.name === 'Ritual de Protección') {
+    nivel = 'basico'; boton = 'Quiero el ritual básico'; tag = 'BÁSICO';
+  } else {
+    nivel = 'avanzado'; boton = 'Quiero el ritual avanzado'; tag = 'AVANZADO +$49';
+  }
+  return `
   <article class="card rit rv">
+    <span class="tag">${tag}</span>
     <svg class="ic" viewBox="0 0 100 100"><use href="#${x.icon}"/></svg>
     <h3>${x.name}</h3>
     <p>${x.desc}</p>
     <div class="price">${money(x.price)}</div>
-    <button class="btn block btn-abrir-lectura" type="button" data-producto="${x.name}">Consultar ritual</button>
+    <a class="btn block" href="rituales.html?tipo=${encodeURIComponent(x.name)}&nivel=${nivel}">${boton}</a>
   </article>
-`).join('');
+`}).join('');
 
 testimoniosList.innerHTML = CONFIG.testimonios.map(t => `
   <blockquote class="testimonio rv">
