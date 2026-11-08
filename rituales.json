@@ -1,0 +1,20 @@
+{
+  "Ritual de Amor": {
+    "icono": "♡",
+    "titulo": "Ritual de Amor",
+    "desc": "Para abrir caminos, atraer o sanar los lazos del corazón. Trabajamos con la energía del amor propio y la conexión con otros.",
+    "basico": "<h4>Materiales</h4><ul><li>Una vela rosa o roja</li><li>Una rosa (fresca o seca)</li><li>Un papel y un lápiz</li><li>Miel (opcional)</li></ul><h4>Paso a paso</h4><ol><li>Enciende la vela y respira profundo tres veces.</li><li>Escribe en el papel tu nombre y el de la persona (o 'amor propio' si buscas atraer).</li><li>Coloca la rosa sobre el papel y di en voz alta: 'Abro mi corazón a lo que está por llegar'.</li><li>Deja la vela encendida 15 minutos. Mientras, visualiza el amor que deseas.</li><li>Guarda el papel y la rosa debajo de tu almohada por 7 noches.</li></ol><h4>Consejo</h4><p>Repite este ritual cada viernes durante 3 semanas para fortalecer la energía.</p>"
+  },
+  "Ritual de Protección": {
+    "icono": "🛡️",
+    "titulo": "Ritual de Protección",
+    "desc": "Para cerrar puertas a lo que drena y blindar tu energía. Ideal si sientes que hay envidias, malas vibras o situaciones que te agotan.",
+    "basico": "<h4>Materiales</h4><ul><li>Una vela blanca</li><li>Sal gruesa</li><li>Un puñado de romero (seco o fresco)</li><li>Un recipiente de vidrio</li></ul><h4>Paso a paso</h4><ol><li>Enciende la vela blanca y respira profundo tres veces.</li><li>Coloca la sal y el romero en el recipiente de vidrio.</li><li>Pasa el recipiente por tu cuerpo, de la cabeza a los pies, mientras dices: 'Limpio mi energía de todo lo que no me pertenece'.</li><li>Deja la vela encendida 15 minutos. Visualízate rodeado de luz blanca.</li><li>Al terminar, tira la sal y el romero en la tierra (o en el inodoro, con agua).</li></ol><h4>Consejo</h4><p>Repite este ritual cada luna llena para mantener tu energía protegida.</p>"
+  },
+  "Ritual de Prosperidad": {
+    "icono": "🪙",
+    "titulo": "Ritual de Prosperidad",
+    "desc": "Para despertar la abundancia y mover lo que está estancado. Trabajamos con la energía del dinero, el trabajo y la apertura de caminos.",
+    "basico": "<h4>Materiales</h4><ul><li>Una vela dorada o verde</li><li>Una moneda de tu país</li><li>Canela en polvo</li><li>Un billete (el de menor valor que tengas)</li></ul><h4>Paso a paso</h4><ol><li>Enciende la vela dorada y respira profundo tres veces.</li><li>Coloca la moneda y el billete sobre la mesa. Espolvorea canela sobre ellos.</li><li>Di en voz alta: 'Abro las puertas de la abundancia en mi vida. El dinero fluye hacia mí'.</li><li>Deja la vela encendida 15 minutos. Visualízate recibiendo lo que deseas.</li><li>Guarda la moneda en tu cartera y el billete en un lugar sagrado (tu altar o debajo de tu almohada).</li></ol><h4>Consejo</h4><p>Repite este ritual cada primer día de mes para atraer la prosperidad.</p>"
+  }
+}
