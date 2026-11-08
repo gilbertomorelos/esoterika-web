@@ -399,14 +399,10 @@ astroProducts.innerHTML = CONFIG.astroProducts.map(x => `
 `).join('');
 
 rituals.innerHTML = CONFIG.rituals.map(x => {
-  let nivel, boton, tag;
-  if (x.name === 'Ritual de Amor') {
-    nivel = 'gratis'; boton = 'Quiero mi ritual gratis'; tag = 'GRATIS';
-  } else if (x.name === 'Ritual de Protección') {
-    nivel = 'basico'; boton = 'Quiero el ritual básico'; tag = 'BÁSICO';
-  } else {
-    nivel = 'avanzado'; boton = 'Quiero el ritual avanzado'; tag = 'AVANZADO +$49';
-  }
+  const esPago = x.name === 'Ritual de Prosperidad';
+  const nivel = esPago ? 'avanzado' : 'gratis';
+  const tag = esPago ? 'AVANZADO +$49' : 'GRATIS';
+  const boton = esPago ? 'Quiero el ritual avanzado' : 'Quiero mi ritual gratis';
   return `
   <article class="card rit rv">
     <span class="tag">${tag}</span>
