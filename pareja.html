@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Carta de Pareja · EsoteriKa Umbra Arcana</title>
+<meta name="theme-color" content="#0b0710">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0710;--bg2:#150b1c;--vino:#5a1426;--mor:#3b1659;--oro:#c9a45c;--oro2:#8c6d34;--humo:#b9aec4;--txt:#e9e1ee;--serif:'Cinzel','Times New Roman',serif;--cur:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.6;padding-bottom:60px}
+.wrap{max-width:600px;margin:0 auto;padding:40px 22px}
+h1{font-family:var(--serif);font-size:clamp(1.8rem,6vw,2.5rem);color:#f3e7c9;text-align:center;margin-bottom:10px}
+.sub{font-family:var(--cur);font-style:italic;font-size:1.2rem;color:var(--humo);text-align:center;margin-bottom:40px}
+.volver{display:inline-block;margin-bottom:30px;color:var(--oro);text-decoration:none;font-family:var(--serif);font-size:.8rem;letter-spacing:.15em;text-transform:uppercase}
+.volver:hover{text-decoration:underline}
+fieldset{border:1px solid rgba(201,164,92,.3);border-radius:6px;padding:20px;margin-bottom:24px;background:linear-gradient(160deg,rgba(59,22,89,.25),rgba(11,7,16,.9))}
+legend{font-family:var(--serif);color:var(--oro);padding:0 10px;font-size:1rem;letter-spacing:.1em}
+.campo{margin-bottom:15px}
+label{display:block;font-size:.85rem;color:var(--humo);margin-bottom:6px}
+input{width:100%;padding:12px;border:1px solid rgba(201,164,92,.3);border-radius:4px;background:rgba(11,7,16,.6);color:var(--txt);font-family:var(--sans);font-size:.95rem}
+input:focus{outline:none;border-color:var(--oro);box-shadow:0 0 10px rgba(201,164,92,.2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 30px;border:1px solid var(--oro);color:#f3e7c9;background:linear-gradient(135deg,rgba(90,20,38,.85),rgba(59,22,89,.85));font-family:var(--serif);letter-spacing:.2em;font-size:.85rem;text-decoration:none;text-transform:uppercase;cursor:pointer;border-radius:2px;width:100%;margin-top:10px;transition:all .3s}
+.btn:hover{box-shadow:0 0 28px rgba(201,164,92,.35);transform:translateY(-2px)}
+.nota{font-size:.75rem;color:var(--humo);text-align:center;margin-top:15px}
+.alerta{display:none;background:rgba(201,164,92,.1);border:1px solid var(--oro);padding:15px;border-radius:6px;text-align:center;margin-bottom:20px;color:#f3e7c9;font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="volver">← Volver al inicio</a>
+  <h1>Carta de Pareja</h1>
+  <p class="sub">Ingresa los datos de nacimiento de ambas personas para calcular su compatibilidad.</p>
+
+  <div id="alerta" class="alerta"></div>
+
+  <form id="formPareja">
+    <fieldset>
+      <legend>Persona 1</legend>
+      <div class="campo">
+        <label>Nombre completo</label>
+        <input type="text" id="nombre1" required placeholder="Ej. Ana López">
+      </div>
+      <div class="campo">
+        <label>Fecha de nacimiento</label>
+        <input type="date" id="fecha1" required>
+      </div>
+      <div class="campo">
+        <label>Hora de nacimiento (si la sabes)</label>
+        <input type="time" id="hora1">
+      </div>
+      <div class="campo">
+        <label>Lugar de nacimiento (Ciudad, País)</label>
+        <input type="text" id="lugar1" required placeholder="Ej. CDMX, México">
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Persona 2</legend>
+      <div class="campo">
+        <label>Nombre completo</label>
+        <input type="text" id="nombre2" required placeholder="Ej. Carlos Pérez">
+      </div>
+      <div class="campo">
+        <label>Fecha de nacimiento</label>
+        <input type="date" id="fecha2" required>
+      </div>
+      <div class="campo">
+        <label>Hora de nacimiento (si la sabes)</label>
+        <input type="time" id="hora2">
+      </div>
+      <div class="campo">
+        <label>Lugar de nacimiento (Ciudad, País)</label>
+        <input type="text" id="lugar2" required placeholder="Ej. Guadalajara, México">
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn">Continuar al Pago Seguro →</button>
+    <p class="nota">Pago seguro vía Mercado Pago · $349 MXN</p>
+  </form>
+</div>
+
+<script>
+document.getElementById('formPareja').addEventListener('submit', function(e) {
+  e.preventDefault(); // Evita que la página se recargue
+
+  // 1. Capturamos los datos
+  const datos = {
+    nombre1: document.getElementById('nombre1').value.trim(),
+    fecha1: document.getElementById('fecha1').value,
+    hora1: document.getElementById('hora1').value,
+    lugar1: document.getElementById('lugar1').value.trim(),
+    nombre2: document.getElementById('nombre2').value.trim(),
+    fecha2: document.getElementById('fecha2').value,
+    hora2: document.getElementById('hora2').value,
+    lugar2: document.getElementById('lugar2').value.trim()
+  };
+
+  // 2. Los guardamos en el navegador para no perderlos
+  localStorage.setItem('esoterika_pareja', JSON.stringify(datos));
+
+  // 3. Mostramos mensaje y redirigimos a Mercado Pago
+  const alerta = document.getElementById('alerta');
+  alerta.style.display = 'block';
+  alerta.innerHTML = "Redirigiendo a Mercado Pago...<br><small>Guarda tus datos. Te pediremos enviarlos por WhatsApp tras el pago.</small>";
+
+  setTimeout(() => {
+    // Aquí va el link real de Mercado Pago de la Carta de Pareja
+    window.location.href = 'https://mpago.la/1YbYX36';
+  }, 2000);
+});
+</script>
+</body>
+</html>

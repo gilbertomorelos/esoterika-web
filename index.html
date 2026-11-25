@@ -139,9 +139,15 @@ footer a{color:var(--oro);font-family:var(--serif);font-size:.7rem;letter-spacin
 .nota{font-size:.75rem;color:var(--humo);text-align:center;margin-top:10px}
 @media(max-width:380px){.selector-lectura{grid-template-columns:1fr}}
 @media(max-width:480px){.lectura-panel{padding:32px 18px 22px}}
+.price-old { font-size: .65em; color: var(--humo); text-decoration: line-through; margin-right: 8px; opacity: .7; }
 </style>
 </head>
 <body>
+
+<!-- BANNER DE PROMOCIÓN -->
+<div style="background:var(--vino); color:#f3e7c9; text-align:center; padding:10px 16px; font-family:var(--serif); font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; border-bottom:1px solid var(--oro); position:relative; z-index:100;">
+  ✧ Promoción de lanzamiento · Ahorra hasta $250 MXN ✧
+</div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <symbol id="pent" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/><path d="M50 8 78 90 8 38h84L22 90z"/></symbol>
@@ -166,7 +172,7 @@ footer a{color:var(--oro);font-family:var(--serif);font-size:.7rem;letter-spacin
     <h1>Algunas respuestas<br>están ocultas</h1>
     <p>El destino deja señales. Pocos saben leerlas.</p>
     <div class="ctas">
-      <a class="btn" href="#elige">Descubrir mi mensaje</a>
+      <a class="btn" href="#elige">Descubrir mi mensaje (Gratis)</a>
       <a class="btn ghost" href="#astro">Ver cartas astrales</a>
     </div>
   </div>
@@ -187,7 +193,7 @@ footer a{color:var(--oro);font-family:var(--serif);font-size:.7rem;letter-spacin
   <div class="wrap center">
     <span class="eyebrow rv">II · El cielo también habla</span>
     <h2 class="rv">ASTROLOGÍA</h2>
-    <p class="lead rv">Tu carta natal no predice. Describe.<br>Y a veces, describirte es el primer paso para cambiar.</p>
+    <p class="lead rv">Tu carta Natal / Astral  no predice. Describe.<br>Y a veces, describirte es el primer paso para cambiar.</p>
     <div class="grid" id="astroProducts"></div>
   </div>
 </section>
@@ -214,7 +220,7 @@ footer a{color:var(--oro);font-family:var(--serif);font-size:.7rem;letter-spacin
     <button class="btn ghost" id="again" style="display:none;margin-top:18px">Elegir otra vez</button>
 
     <div class="lectura-basica-wrap rv">
-      <button class="btn block btn-abrir-lectura" type="button">✧ Quiero mi lectura completa</button>
+      <button class="btn block btn-abrir-lectura" type="button">✧ Quiero mi lectura completa (Grátis)</button>
       <p class="lectura-basica-ayuda">Desbloquea tu lectura personalizada de 3 cartas.</p>
     </div>
   </div>
@@ -243,7 +249,7 @@ footer a{color:var(--oro);font-family:var(--serif);font-size:.7rem;letter-spacin
     <svg class="divider rv" style="width:70px;height:70px"><use href="#pent"/></svg>
     <h2 class="rv">¿QUIERES SABER QUÉ DICEN LAS CARTAS Y EL CIELO SOBRE TI?</h2>
     <p class="lead rv" style="margin-bottom:34px">Ya diste el primer paso. Lo demás está esperando.</p>
-    <button class="btn rv btn-abrir-lectura" type="button">Quiero mi lectura</button>
+    <button class="btn rv btn-abrir-lectura" type="button">Quiero mi lectura (Grátis)</button>
   </div>
 </section>
 </main>
@@ -291,11 +297,12 @@ const CONFIG = {
 
   mercadoPagoLinks: {
     "Tarot General": "https://mpago.la/1MoXPMn",
-    "Tarot del Amor": "https://mpago.la/1MoXPMn",
-    "Las 3 Preguntas": "https://mpago.la/1MoXPMn",
-    "Carta Astral": "https://mpago.la/1JG3ugz",
+    "Tarot del Amor": "https://mpago.la/1QCBuYs",
+    "Las 3 Preguntas": "https://mpago.la/17sndhY",
+    "Carta Natal": "https://mpago.la/1JG3ugz",
     "Guía de Tránsitos": "https://mpago.la/25s9JQk",
-    "Pack Carta + Tránsitos": "https://mpago.la/1dL8mS1"
+    "Pack Carta + Tránsitos": "https://mpago.la/1dL8mS1",
+    "Carta de Pareja": "https://mpago.la/1YbYX36"
   },
 
   social: {
@@ -311,9 +318,10 @@ const CONFIG = {
   ],
 
   astroProducts: [
-    { name: "Carta Natal", price: 229, icon: "zodiac", tag: "El más completo", desc: "Tu mapa natal completo: Sol, Luna, Ascendente, casas, aspectos y dirección de crecimiento." },
-    { name: "Guía de Tránsitos", price: 129, icon: "tránsito", tag: "Guía diaria · semanal · mensual", desc: "Lo que el cielo activa en tu carta hoy: qué energía trae el día y cómo aprovecharla." },
-    { name: "Pack Carta + Tránsitos", price: 329, icon: "sunmoon", tag: "AHORRA CON EL PACK", desc: "Tu carta natal completa + tu guía de tránsitos. El mapa y la brújula del día." }
+    { name: "Carta Natal", price: 229, originalPrice: 399, icon: "zodiac", tag: "El más completo", desc: "Tu mapa natal completo: Sol, Luna, Ascendente, casas, aspectos y dirección de crecimiento." },
+    { name: "Guía de Tránsitos", price: 129, originalPrice: 299, icon: "tránsito", tag: "Guía diaria · semanal · mensual", desc: "Lo que el cielo activa en tu carta hoy: qué energía trae el día y cómo aprovecharla." },
+    { name: "Pack Carta + Tránsitos", price: 329, originalPrice: 499, icon: "sunmoon", tag: "AHORRA CON EL PACK", desc: "Tu carta natal completa + tu guía de tránsitos. El mapa y la brújula del día." },
+    { name: "Carta de Pareja", price: 349, originalPrice: 599, icon: "heart", tag: "Compatibilidad y Amor", desc: "Descubre la dinámica entre dos personas: qué los une, qué los desafía y cómo crecer juntos según el cielo." }
   ],
 
   rituals: [
@@ -393,7 +401,10 @@ astroProducts.innerHTML = CONFIG.astroProducts.map(x => `
     <svg class="ic" viewBox="0 0 100 100"><use href="#${x.icon}"/></svg>
     <h3>${x.name}</h3>
     <p>${x.desc}</p>
-    <div class="price">${money(x.price)}</div>
+    <div class="price">
+      ${x.originalPrice ? `<span class="price-old">$${x.originalPrice}</span>` : ''}
+      ${money(x.price)}
+    </div>
     <button class="btn block btn-abrir-lectura" type="button" data-producto="${x.name}">Solicitar ${x.name.toLowerCase()}</button>
   </article>
 `).join('');
@@ -448,7 +459,7 @@ function dealCards() {
     if (deck.classList.contains('done')) return;
     const c = pool[el.dataset.i];
     deck.classList.add('done'); el.classList.add('flip');
-    msg.innerHTML = `<h3>${c.n}</h3><p>${c.t}</p><button class="btn block" type="button" id="btnPedirDatos">Quiero saber más sobre mi carta</button>`;
+    msg.innerHTML = `<h3>${c.n}</h3><p>${c.t}</p><button class="btn block" type="button" id="btnPedirDatos">Quiero saber más sobre mi carta - GRATIS</button>`;
     msg.classList.add('on');
     setTimeout(() => again.style.display = 'inline-flex', 1800);
   });
@@ -485,8 +496,8 @@ document.addEventListener('click', e => {
     nombre: r.name, precio: r.price, icono: r.icon === 'cards' ? '🃏' : r.icon === 'heart' ? '♡' : '👁', tipo: 'tarot'
   }));
   const productosAstro = CONFIG.astroProducts.map(p => ({
-    nombre: p.name, precio: p.price,
-    icono: p.icon === 'zodiac' ? '♈' : p.icon === 'tránsito' ? '☉' : '✧', tipo: 'astro'
+    nombre: p.name, precio: p.price, original: p.originalPrice,
+    icono: p.icon === 'zodiac' ? '♈' : p.icon === 'tránsito' ? '☉' : p.icon === 'heart' ? '♥' : '✧', tipo: 'astro'
   }));
 
   function generarTextoDifuminado(tipo) {
@@ -522,7 +533,10 @@ document.addEventListener('click', e => {
       <button class="opcion-lectura" type="button" data-producto="${p.nombre}" data-precio="${p.precio}">
         <span class="icono">${p.icono}</span>
         <span class="nombre">${p.nombre}</span>
-        <span class="precio">$${p.precio}</span>
+        <span class="precio">
+          ${p.original ? `<span class="price-old">$${p.original}</span>` : ''}
+          $${p.precio}
+        </span>
       </button>
     `).join('');
 
@@ -572,6 +586,14 @@ document.addEventListener('click', e => {
 
   btnComprar.addEventListener('click', () => {
     if (!productoSeleccionado) return;
+
+    // Si es Carta de Pareja, lo mandamos al formulario especial
+    if (productoSeleccionado === "Carta de Pareja") {
+      window.location.href = 'pareja.html';
+      return;
+    }
+
+    // Para los demás productos, va directo a Mercado Pago
     const link = CONFIG.mercadoPagoLinks[productoSeleccionado];
     if (link && !link.includes('TU_LINK')) {
       window.location.href = link;
@@ -579,8 +601,11 @@ document.addEventListener('click', e => {
       alert(`El link de pago para "${productoSeleccionado}" aún no está configurado.`);
     }
   });
-})();
+})(); // <--- ESTA LÍNEA ES LA QUE FALTABA
 
+/* ============================================================
+   PARTÍCULAS Y ANIMACIONES
+   ============================================================ */
 /* ============================================================
    PARTÍCULAS Y ANIMACIONES
    ============================================================ */
